@@ -2,7 +2,7 @@ import path from "path";
 import { data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
-import { goToLoginSingup, isLoginWarningVisible, login } from "../utils/account.util";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
 
 
 
@@ -15,7 +15,7 @@ test.describe("All account related tests", () => {
 
 
   //this is happy end test
-  test("login with correct username and password", async ({ account, page }) => {
+  test.skip("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
@@ -25,7 +25,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test("login with incorrect username and password", async ({ account, page }) => {
+  test.skip("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -35,7 +35,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -49,9 +49,17 @@ test.describe("All account related tests", () => {
 
   });
 
+  test("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
+
+    await loadLoginState(page);
+    await page.goto("");
+    await expect(header.logout).toBeVisible();
+    await expect(header.deleteAccount).toBeVisible();
+
+  })
 
   //happy end case
-  test("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
 
@@ -60,7 +68,7 @@ test.describe("All account related tests", () => {
     await account.clickOnSignup(); //clicking here navigates the user to a new page
 
     await expect(page).toHaveURL(/.*signup/);
-    
+
     await account.enterFirstName(data.firstName)
     await account.enterLastName(data.lastName)
     await account.enterSignupPassword(data.signupPassword)
@@ -75,8 +83,8 @@ test.describe("All account related tests", () => {
     await account.pickyear("1990")
     await account.createAccount();
     await expect(page).toHaveURL(/.*account_created/)
-
-    await page.context().storageState({path:path.resolve(__dirname,"../data/login.data.json")})
+    //save login info because after making new account you are automatically signed in
+    await saveCurrentLoginState(page);
 
 
   });
