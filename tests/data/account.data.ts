@@ -11,6 +11,20 @@ export const data ={
     loginPassword : ",*F-4#f%~vC-ZCB",// these info here are vaild,
     incorrectLoginEmail:"12@s",
     incorrectLoginPassword:"12@s",
+    signupEmail:"somethidng@somewhere.com",
+    signupPassword:"hahahaha",
+    signupUsername:"someone",
+
+    //the following fields are all related to signup only
+
+    firstName:"dfdg",
+    lastName:"dfgdfg",
+    address:"fdgfg",
+    country:"Australia",
+    state:"ddd",
+    city:"sdsd",
+    zipCode:"234324",
+    mobileNumber:"23432234",
 
 }
 

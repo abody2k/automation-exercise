@@ -50,4 +50,37 @@ test.describe("All account related tests", () => {
   });
 
 
+  //happy end case
+  test("signup using correct genuine data", async ({ account, page }) => {
+
+    await goToLoginSingup(page, account);
+
+    await account.enterSignupEmail(data.signupEmail);
+    await account.enterSignupUsername(data.signupUsername);
+    await account.clickOnSignup(); //clicking here navigates the user to a new page
+
+    await expect(page).toHaveURL(/.*signup/);
+    
+    await account.enterFirstName(data.firstName)
+    await account.enterLastName(data.lastName)
+    await account.enterSignupPassword(data.signupPassword)
+    await account.enterAddress(data.address)
+    await account.enterCity(data.city)
+    await account.enterState(data.state);
+    await account.enterZipCode(data.zipCode)
+    await account.enterMobileNumber(data.mobileNumber)
+
+    await account.pickDay("7")
+    await account.pickMonth("7")
+    await account.pickyear("1990")
+    await account.createAccount();
+    await expect(page).toHaveURL(/.*account_created/)
+
+    await page.context().storageState({path:path.resolve(__dirname,"../data/login.data.json")})
+
+
+  });
+
+
+
 });
