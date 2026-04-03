@@ -95,24 +95,24 @@ export class Header {
      * Note that this will navigate the user to youtube using the same page not
      * a new blank page
      */
-    async goToVideoTutorials(){
-       await this.page.getByRole('link', { name: ' Video Tutorials' }).click();
+    async goToVideoTutorials() {
+        await this.page.getByRole('link', { name: ' Video Tutorials' }).click();
     }
 
     /**
      *It takes the user to the Cart UI
      * 
      */
-    async goToCart(){
-       await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
+    async goToCart() {
+        await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
     }
 
     /**
      *It takes the user to the Cart UI
      * 
      */
-    async goToTestCases(){
-       await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
+    async goToTestCases() {
+        await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
     }
 
 
