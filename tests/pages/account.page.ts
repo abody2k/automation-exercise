@@ -18,7 +18,10 @@ export class Account {
         await this.loginEmail.fill(email);
     }
 
-    
+    async enterPasswordForLogin(password : string){
+
+        await this.loginPassword.fill(password);
+    }    
 
 
 
