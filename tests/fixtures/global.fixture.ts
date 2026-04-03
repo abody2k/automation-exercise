@@ -1,4 +1,4 @@
-import {test as base,expect} from "@playwright/test"
+import {test as base} from "@playwright/test"
 import { Account } from "../pages/account.page"
 
 
@@ -19,3 +19,5 @@ export const test = base.extend<GlobalFixture>({
 
     }
 })
+
+export const expect = base.expect;
