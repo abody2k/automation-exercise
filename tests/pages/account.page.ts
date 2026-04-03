@@ -5,12 +5,14 @@ export class Account {
 
     loginEmail: Locator
     loginPassword : Locator
+    loginWarningMsg: Locator
 
 
     constructor(private page: Page) {
 
         this.loginEmail = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address')
         this.loginPassword = page.locator('form').getByPlaceholder("Password")
+        this.loginWarningMsg = page.getByText('Your email or password is incorrect!')
     }
 
     /**

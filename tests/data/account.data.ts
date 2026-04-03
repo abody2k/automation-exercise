@@ -8,7 +8,9 @@
 export const data ={ 
 
     loginEmail: "goodman@fake-email.com",// these info here are vaild
-    loginPassword : ",*F-4#f%~vC-ZCB"// these info here are vaild
+    loginPassword : ",*F-4#f%~vC-ZCB",// these info here are vaild,
+    incorrectLoginEmail:"12@s",
+    incorrectLoginPassword:"12@s",
 
 }
 
