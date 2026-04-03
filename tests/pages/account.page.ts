@@ -13,6 +13,14 @@ export class Account {
         this.loginPassword = page.locator('form').getByPlaceholder("Password")
     }
 
+    /**
+     * it takes the user to the login/sign up ui
+     */
+    async gotoLoginSignup(){
+
+        await this.page.goto("/login")
+    }
+
     async enterEmailForLogin(email : string){
 
         await this.loginEmail.fill(email);
