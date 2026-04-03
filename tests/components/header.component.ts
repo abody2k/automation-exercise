@@ -1,11 +1,21 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class Header {
 
+    //all these fields are locators that are in the header
+    /* I only added these fields because they will be the only fields
+    * that will be used later to assert for visibility in tests
+    */
+   
+    signupLogin: Locator
+    logout: Locator
+    deleteAccount: Locator
+
 
     constructor(private page: Page) {
-
-
+        this.signupLogin = this.page.getByRole('link', { name: ' Signup / Login' })
+        this.logout = this.page.getByRole('link', { name: 'Logout' })
+        this.deleteAccount = this.page.getByRole('link', { name: 'Delete Account' })
     }
 
 
@@ -34,7 +44,7 @@ export class Header {
      */
     async goToSignupLogin() {
 
-        await this.page.getByRole('link', { name: ' Signup / Login' }).click();
+        await this.signupLogin.click();
 
     }
 
@@ -57,9 +67,9 @@ export class Header {
      * and navigate entirely without redirecting the user to a confirmation UI
      * It is only visible or possible to click when the user is logged in
      */
-    async DeleteAccount(){
+    async DeleteAccount() {
 
-        await this.page.getByRole('link', { name: 'Delete Account' }).click();
+        await this.deleteAccount.click();
     }
 
 
@@ -67,15 +77,15 @@ export class Header {
      * Basically logs out and redirects the user to a logging out finished UI
      * It is only visible or possible to click when the user is logged in
      */
-    async goLogout(){
+    async goLogout() {
 
-        await this.page.getByRole('link', { name: 'Logout' }).click();
+        await this.logout.click();
     }
 
     /**
      * CLicks on the header's logo
      */
-    async clickOnLogo(){
+    async clickOnLogo() {
 
         await this.page.getByRole('link', { name: 'Website for automation' }).click();
     }
