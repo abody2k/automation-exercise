@@ -15,17 +15,18 @@ test.describe("All account related tests", () => {
 
 
   //this is happy end test
-  test.skip("login with correct username and password", async ({ account, page }) => {
+  test("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
 
     await login(account, data.loginEmail, data.loginPassword);
     await expect(page).toHaveURL(process.env.BASE_URL as string, { timeout: 10000 });
+    await saveCurrentLoginState(page);
 
   });
 
-  test.skip("login with incorrect username and password", async ({ account, page }) => {
+  test("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -35,7 +36,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -59,7 +60,7 @@ test.describe("All account related tests", () => {
   })
 
   //happy end case
-  test.skip("signup using correct genuine data", async ({ account, page }) => {
+  test("signup using correct genuine data", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
 
