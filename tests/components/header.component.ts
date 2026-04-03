@@ -6,7 +6,7 @@ export class Header {
     /* I only added these fields because they will be the only fields
     * that will be used later to assert for visibility in tests
     */
-   
+
     signupLogin: Locator
     logout: Locator
     deleteAccount: Locator
@@ -88,6 +88,15 @@ export class Header {
     async clickOnLogo() {
 
         await this.page.getByRole('link', { name: 'Website for automation' }).click();
+    }
+
+
+    /**
+     * Note that this will navigate the user to youtube using the same page not
+     * a new blank page
+     */
+    async goToVideoTutorials(){
+       await this.page.getByRole('link', { name: ' Video Tutorials' }).click();
     }
 
 }
