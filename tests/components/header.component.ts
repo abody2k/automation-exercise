@@ -72,5 +72,12 @@ export class Header {
         await this.page.getByRole('link', { name: 'Logout' }).click();
     }
 
+    /**
+     * CLicks on the header's logo
+     */
+    async clickOnLogo(){
+
+        await this.page.getByRole('link', { name: 'Website for automation' }).click();
+    }
 
 }
