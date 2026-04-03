@@ -7,7 +7,7 @@ export class Account {
     loginPassword : Locator
 
 
-    constructor(page: Page) {
+    constructor(private page: Page) {
 
         this.loginEmail = page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address')
         this.loginPassword = page.locator('form').getByPlaceholder("Password")
@@ -21,7 +21,15 @@ export class Account {
     async enterPasswordForLogin(password : string){
 
         await this.loginPassword.fill(password);
-    }    
+    }
+    
+    /**
+     * it assumes that you already filled the fields for username and password
+     */
+    async login(){
+        
+        await this.page.getByRole('button', { name: 'Login' }).click()
+    }
 
 
 
