@@ -99,4 +99,21 @@ export class Header {
        await this.page.getByRole('link', { name: ' Video Tutorials' }).click();
     }
 
+    /**
+     *It takes the user to the Cart UI
+     * 
+     */
+    async goToCart(){
+       await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
+    }
+
+    /**
+     *It takes the user to the Cart UI
+     * 
+     */
+    async goToTestCases(){
+       await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
+    }
+
+
 }
