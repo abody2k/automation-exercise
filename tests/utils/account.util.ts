@@ -10,16 +10,31 @@ import { Account } from "../pages/account.page";
  * @param email 
  * @param password 
  */
-export async function login(account: Account,page:Page, email: string, password: string) {
+export async function login(account: Account, email: string, password: string) {
 
+
+    await account.enterEmailForLogin(email)
+    await account.enterPasswordForLogin(password);
+    await account.login();
+
+}
+
+
+export async function goToLoginSingup(page: Page, account: Account) {
     await account.gotoLoginSignup();
 
 
     //the user should stay there without redirection
 
     await expect(page).toHaveURL(/.*login/);
-    await account.enterEmailForLogin(email)
-    await account.enterPasswordForLogin(password);
-    await account.login();
+}
 
+
+/**
+ * checks if the login error warning is visible or not
+ * @param account 
+ */
+export async function isLoginWarningVisible(account: Account) {
+
+    await expect(account.loginWarningMsg).toBeVisible();
 }
