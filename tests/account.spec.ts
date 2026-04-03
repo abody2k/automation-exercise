@@ -7,7 +7,7 @@ import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurr
 
 
 
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
 
 test.describe("All account related tests", () => {
