@@ -1,0 +1,50 @@
+import { Page, TestType } from "@playwright/test";
+import { expect } from "../fixtures/global.fixture";
+import { Account } from "../pages/account.page";
+import path from "path";
+
+
+
+/**
+ * a helper function that goes to login page and uses email and password to login
+ * @param account the account object that you got from test
+ * @param email 
+ * @param password 
+ */
+export async function login(account: Account, email: string, password: string) {
+
+
+    await account.enterEmailForLogin(email)
+    await account.enterPasswordForLogin(password);
+    await account.login();
+
+}
+
+
+export async function goToLoginSingup(page: Page, account: Account) {
+    await account.gotoLoginSignup();
+
+
+    //the user should stay there without redirection
+
+    await expect(page).toHaveURL(/.*login/);
+}
+
+
+/**
+ * checks if the login error warning is visible or not
+ * @param account 
+ */
+export async function isLoginWarningVisible(account: Account) {
+
+    await expect(account.loginWarningMsg).toBeVisible();
+}
+
+export async function saveCurrentLoginState(page : Page) {
+    page.context().storageState({ path: path.resolve(__dirname, "../data/login.data.json") })
+}
+
+export async function loadLoginState(page:Page) {
+    await page.context().setStorageState(path.resolve(__dirname, "../data/login.data.json"))
+    // test.use({ storageState: path.resolve(__dirname, "../data/login.data.json") })
+}
