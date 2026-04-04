@@ -13,3 +13,19 @@ export async function getAllProducts() {
     return (await data.json());
 
 }
+
+
+/**
+ * here goes api functions that are there only for test puoposes and are not expected
+ * to give an actual result, meaning this is an negative case
+ */
+
+
+export async function getAllProductsWithPost() {
+
+    let context = await newRequest();
+
+    let data = await context.post(`api/productsList`);
+    return (await data.json());
+
+}
