@@ -1,4 +1,4 @@
-import { request } from "@playwright/test";
+import { newRequest } from "../utils/apis.util";
 
 
 
@@ -23,11 +23,7 @@ export async function registerAccount(obj: { name?: string, email?: string, pass
 }
 
 
-async function newRequest() {
 
-    return await request.newContext({ baseURL: process.env.BASE_URL, extraHTTPHeaders: {} });
-
-}
 
 export async function getUserAccountDetailByEmail(email?: string) {
 
