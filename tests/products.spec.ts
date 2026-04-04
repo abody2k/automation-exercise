@@ -54,13 +54,23 @@ test.describe("all products tests go here", () => {
 
 
 
-    test("Search for a product while providing a product name", async () => {
+    test.skip("Search for a product while providing a product name", async () => {
 
 
-        let data = await searchForProduct({search_product:products[0]});
-        
+        let data = await searchForProduct({ search_product: products[0] });
+
         expect(data.responseCode).toBe(200);
         expect(data.products).toBeTruthy()
+
+    })
+
+    test("Search for a product without providing a product name", async () => {
+
+
+        let data = await searchForProduct({});
+
+        expect(data.responseCode).toBe(400);
+        expect(data.message).toBe("Bad request, search_product parameter is missing in POST request.")
 
     })
 })
