@@ -46,20 +46,20 @@ export const data = {
 export const apiData = {
 
 
-    deleteAccount:{
+    deleteAccount: {
 
-        email:"somethidnggggg@somewhere.com",
-        password:"hahahaha",
-        wrongPasswors:"wrong"
+        email: "somethidnggggg@somewhere.com",
+        password: "hahahaha",
+        wrongPasswors: "wrong"
 
     },
 
-    updateAccount: {
-        email:"somethidnggggg@somewhere.com",
-        password:"hahahaha",
+    newAccount: {
+        email: "somethidnggggg@somewhere.com",
+        password: "hahahaha",
         firstname: "noice",
         lastname: "dfgdfg",
-        name:"haaaaaaaa      xxxxxxxx",
+        name: "haaaaaaaa      xxxxxxxx",
         address1: "776ghjgh",
         address2: "fdghfghgfhgfg",
         country: "Australia",
@@ -70,10 +70,28 @@ export const apiData = {
         birth_date: "7",
         birth_month: "7",
         birth_year: "2000",
-        company:"deeze n",
-        title:"Mr",
+        company: "deeze n",
+        title: "Mr",
+    },
 
-
+    updateAccount: {
+        email: "somethidnggggg@somewhere.com",
+        password: "hahahaha",
+        firstname: "noice",
+        lastname: "dfgdfg",
+        name: "haaaaaaaa      xxxxxxxx",
+        address1: "776ghjgh",
+        address2: "fdghfghgfhgfg",
+        country: "Australia",
+        state: "ddd",
+        city: "sdsd",
+        zipcode: "234324",
+        mobile_number: "23432234",
+        birth_date: "7",
+        birth_month: "7",
+        birth_year: "2000",
+        company: "deeze n",
+        title: "Mr",
     }
 
 }

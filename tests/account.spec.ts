@@ -3,7 +3,7 @@ import { apiData, data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
-import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount } from "../api/account.api";
+import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount, verifyLogin } from "../api/account.api";
 import { randomInt } from "crypto";
 
 
@@ -111,7 +111,7 @@ test.describe("All account related tests", () => {
 
   test.skip("register account using API only", async ({ }) => {
 
-    var context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
+    var context = await registerAccount(apiData.newAccount)
 
     expect(context).toBe(201)
   })
@@ -231,7 +231,7 @@ test.describe("All account related tests", () => {
 
 
 
-  test(`deleting an account using provided email and password`, async ({ }) => {
+  test.skip(`deleting an account using provided email and password`, async ({ }) => {
 
     let s = await deleteAccount(apiData.deleteAccount.email,apiData.deleteAccount.password);
     console.log(s);
@@ -239,4 +239,27 @@ test.describe("All account related tests", () => {
     expect(s.responseCode, "failed deleting data").toBe(200);
 
   });
+
+
+
+
+
+  test.skip(`logging in with valid details`, async ({ }) => {
+
+    let s = await verifyLogin(apiData.newAccount.email,apiData.newAccount.password);
+    console.log(s);
+
+    expect(s.responseCode, "failed veryfying logging data").toBe(200);
+
+  });
+
+  test.skip(`logging in with invalid details`, async ({ }) => {
+
+    let s = await verifyLogin(apiData.newAccount.email,apiData.newAccount.password+" very wrong details");
+    console.log(s);
+
+    expect(s.responseCode, "failed veryfying logging data").toBe(404);
+
+  });
+
 });

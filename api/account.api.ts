@@ -78,3 +78,41 @@ export async function deleteAccount(email:string,password:string) {
     */
     return (await data.json());
 }
+
+
+
+export async function verifyLogin(email:string,password:string) {
+
+    let context = await newRequest();
+
+    let data = await context.post(`api/verifyLogin`, { form: {
+        email:email,
+        password:password
+    } });
+    ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return (await data.json());
+}
+
+
+/**
+ * the following api methods will be used as edge cases only and are not expected
+ * to perform well but rather to test the error handling system
+ */
+
+
+export async function verifyLoginwithDelete() {
+
+    let context = await newRequest();
+
+    let data = await context.delete(`api/verifyLogin`);
+    ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return (await data.json());
+}
