@@ -38,3 +38,15 @@ export async function getAllProductsWithPost() {
     return (await data.json());
 
 }
+
+
+
+export async function getAllbrandsWithPut() {
+
+    let context = await newRequest();
+
+    let data = await context.post(`api/brandsList`);
+
+    return (await data.json());
+
+}

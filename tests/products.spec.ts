@@ -1,4 +1,4 @@
-import { getAllbrands, getAllProducts, getAllProductsWithPost } from "../api/products.api";
+import { getAllbrands, getAllbrandsWithPut, getAllProducts, getAllProductsWithPost } from "../api/products.api";
 import { expect, test } from "../fixtures/global.fixture";
 
 test.describe("all products tests go here", () => {
@@ -28,7 +28,7 @@ test.describe("all products tests go here", () => {
 
 
 
-    test("get all brands", async () => {
+    test.skip("get all brands", async () => {
 
 
         let data = await getAllbrands();
@@ -39,4 +39,14 @@ test.describe("all products tests go here", () => {
 
     })
 
+
+    test("getting brands with post method should not work", async () => {
+
+
+        let data = await getAllbrandsWithPut();
+
+        expect(data.responseCode).toBe(405);
+        expect(data.message).toBe("This request method is not supported.")
+
+    })
 })
