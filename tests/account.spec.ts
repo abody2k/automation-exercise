@@ -92,12 +92,25 @@ test.describe("All account related tests", () => {
   });
 
 
-  test("register account using API only",async ({})=>{
+  test.skip("register account using API only", async ({ }) => {
 
-   var context = await registerAccount(data.signupUsername,data.signupEmail,data.signupPassword,data.city,data.state,data.firstName,data.lastName,data.zipCode,data.address,data.mobileNumber,data.birth_date,data.birth_month,data.birth_year,data.country,"","","")
+    var context = await registerAccount(data.signupUsername, data.signupEmail, data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.birth_year, data.country, "", "", "")
 
-   await expect(context).toBeOK()
+    await expect(context).toBeOK()
   })
+
+  test("Using same email to create an account more than once should not work",{annotation:{type:"edge case",description:"if it fails it means system allows creation of more than 1 account using same email"}}, async ({ }) => {
+
+    let context = await registerAccount(data.signupUsername, data.signupEmail, data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.birth_year, data.country, "", "", "")
+
+    await expect(context).toBeOK() // it is ok if the given data is new so the test should pass
+
+    await registerAccount(data.signupUsername,data.signupEmail,data.signupPassword,data.city,data.state,data.firstName,data.lastName,data.zipCode,data.address,data.mobileNumber,data.birth_date,data.birth_month,data.birth_year,data.country,"","","")
+
+    await expect(context).not.toBeOK(); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+
+  })
+
 
 
 });
