@@ -2,7 +2,7 @@ import { request } from "@playwright/test";
 
 
 
-export async function registerAccount(username: string, email: string, password: string, city: string, state: string, firstName: string, lastName: string, zipcode: string, address1: string, mobileNumber: string, birth_date: string, birth_month: string, birth_year: string, country: string, title: string, company: string, address2: string) {
+export async function registerAccount(username: string, email: string, password: string, city: string, state: string, firstName: string, lastName: string, zipcode: string, address1: string, mobileNumber: string, birth_date: string, birth_month: string, birth_year: string, country: string, title: string = "", company: string = "", address2: string = "") {
 
 
     let context = await request.newContext({
@@ -35,9 +35,12 @@ export async function registerAccount(username: string, email: string, password:
             "address2": address2
         }
     });
-    // console.log(data);
-
-    return data;
+   ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return  (await data.json()).responseCode;
 
 
 }
