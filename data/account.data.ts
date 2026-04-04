@@ -46,6 +46,14 @@ export const data = {
 export const apiData = {
 
 
+    deleteAccount:{
+
+        email:"somethidnggggg@somewhere.com",
+        password:"hahahaha",
+        wrongPasswors:"wrong"
+
+    },
+
     updateAccount: {
         email:"somethidnggggg@somewhere.com",
         password:"hahahaha",

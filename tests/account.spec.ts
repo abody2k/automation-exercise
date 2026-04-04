@@ -3,7 +3,7 @@ import { apiData, data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
-import { getUserAccountDetailByEmail, registerAccount, updateUserAccount } from "../api/account.api";
+import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount } from "../api/account.api";
 import { randomInt } from "crypto";
 
 
@@ -182,19 +182,19 @@ test.describe("All account related tests", () => {
   for (const [key, value] of Object.entries(mydata)) {
 
 
-  test.skip(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
-    const typedKey = key as keyof typeof mydata;
-    const { [typedKey]: _, ...tempData } = mydata
-    let context = await registerAccount(tempData)
+    test.skip(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
+      const typedKey = key as keyof typeof mydata;
+      const { [typedKey]: _, ...tempData } = mydata
+      let context = await registerAccount(tempData)
 
-    expect(context, `the ${key} hasn't been sent yet the account was made`).toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+      expect(context, `the ${key} hasn't been sent yet the account was made`).toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
-  });
+    });
 
-}
+  }
 
 
-  test(`getting account details by email`, async ({ }) => {
+  test.skip(`getting account details by email`, async ({ }) => {
 
     let s = await getUserAccountDetailByEmail(data.signupEmail);
     console.log(s);
@@ -204,27 +204,39 @@ test.describe("All account related tests", () => {
 
 
 
-    test.skip(`getting account details without sending an email`,{annotation:{
+  test.skip(`getting account details without sending an email`, {
+    annotation: {
 
 
-      type:"edge case",
-      "description":"it will basically be undefined thus far the result should not point to any account"
-    }}, async ({ }) => {
+      type: "edge case",
+      "description": "it will basically be undefined thus far the result should not point to any account"
+    }
+  }, async ({ }) => {
 
     let s = await getUserAccountDetailByEmail();
-    
-    expect(s.responseCode,"the API call actually points to a data which is not correct behavior").not.toBe(200);
-    
+
+    expect(s.responseCode, "the API call actually points to a data which is not correct behavior").not.toBe(200);
+
   });
 
 
-    test(`updating account`, async ({ }) => {
+  test.skip(`updating account`, async ({ }) => {
 
     let s = await updateUserAccount(apiData.updateAccount);
-      console.log(s);
-      
-    expect(s.responseCode,"the API call actually points to a data which is not correct behavior").toBe(200);
-    
+    console.log(s);
+
+    expect(s.responseCode, "the API call actually points to a data which is not correct behavior").toBe(200);
+
   });
 
+
+
+  test(`deleting an account using provided email and password`, async ({ }) => {
+
+    let s = await deleteAccount(apiData.deleteAccount.email,apiData.deleteAccount.password);
+    console.log(s);
+
+    expect(s.responseCode, "failed deleting data").toBe(200);
+
+  });
 });

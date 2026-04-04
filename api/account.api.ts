@@ -61,3 +61,20 @@ export async function updateUserAccount(params: { name?: string, email?: string,
     */
     return (await data.json());
 }
+
+
+export async function deleteAccount(email:string,password:string) {
+
+    let context = await newRequest();
+
+    let data = await context.delete(`api/deleteAccount`, { form: {
+        email:email,
+        password:password
+    } });
+    ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return (await data.json());
+}
