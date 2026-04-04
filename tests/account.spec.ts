@@ -95,18 +95,18 @@ test.describe("All account related tests", () => {
 
   test.skip("register account using API only", async ({ }) => {
 
-    var context = await registerAccount(data.signupUsername, data.signupEmail, data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.birth_year, data.country)
+    var context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.birth_year,country:data.country})
 
     expect(context).toBe(201)
   })
 
   test.skip("Using same email to create an account more than once should not work", { annotation: { type: "edge case", description: "if it fails it means system allows creation of more than 1 account using same email" } }, async ({ }) => {
 
-    let context = await registerAccount(data.signupUsername, data.signupEmailNew, data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.birth_year, data.country)
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmailNew + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.birth_year})
 
     expect(context).toBe(201) // it is ok if the given data is new so the test should pass
 
-    context = await registerAccount(data.signupUsername, data.signupEmailNew, data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.birth_year, data.country)
+    context = await registerAccount({name:data.signupUsername,email: data.signupEmailNew + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.birth_year,country:data.country})
 
     expect(context).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
 
@@ -121,18 +121,45 @@ test.describe("All account related tests", () => {
   */
   test("registering account using invalid birth date info", { annotation: { type: "edge case", description: "if it fails it means system allows creation of more than 1 account using same email" } }, async ({ }) => {
 
-    
-    let context = await registerAccount(data.signupUsername, data.signupEmail+randomInt(100,1000).toString(27), data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.invalidBirth_date, data.birth_month, data.birth_year, data.country)
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.invalidBirth_date,birth_month: data.birth_month,birth_year: data.birth_year,country:data.country})
 
     expect(context, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
-    context = await registerAccount(data.signupUsername, data.signupEmail+randomInt(100,1000).toString(27), data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.birth_month, data.invalidBirth_year, data.country)
+  })
+
+
+  test("registering account using invalid birth month info", { annotation: { type: "edge case", description: "failure means the system allows faulty month input" } }, async ({ }) => {
+
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.invalidBirth_month,birth_year: data.birth_year,country:data.country})
+
+    expect(context, { message: "invalid month (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+  })
+
+
+  test("registering account using invalid year of birth", { annotation: { type: "edge case", description: "failure means the system allows faulty year input" } }, async ({ }) => {
+
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.invalidBirth_year,country:data.country})
 
     expect(context, { message: "invalid year (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+  })
 
-    context = await registerAccount(data.signupUsername, data.signupEmail+randomInt(100,1000).toString(27), data.signupPassword, data.city, data.state, data.firstName, data.lastName, data.zipCode, data.address, data.mobileNumber, data.birth_date, data.invalidBirth_month, data.birth_year, data.country)
 
-    expect(context, { message: "invalid month should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+  test("registering account with empty country", { annotation: { type: "edge case", description: "trying to make a new account with passing an empty field for the country parameter" } }, async ({ }) => {
+
+
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.birth_year,country:""})
+
+    expect(context, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+
+  })
+
+    test("registering account without passing the country", { annotation: { type: "edge case", description: "trying to make a new account with passing empty string for the country parameter" } }, async ({ }) => {
+
+
+    let context = await registerAccount({name:data.signupUsername,email: data.signupEmail + randomInt(100, 1000).toString(27),password: data.signupPassword,city: data.city,state: data.state,firstName: data.firstName,lastName: data.lastName,zipcode: data.zipCode,address1: data.address,mobileNumber: data.mobileNumber,birth_date: data.birth_date,birth_month: data.birth_month,birth_year: data.birth_year})
+
+    expect(context, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+
   })
 
 });

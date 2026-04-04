@@ -33,7 +33,7 @@ export const data = {
     invalidBirth_date: "99",
     invalidBirth_month: "88",
     invalidBirth_year: "0",
-    signupEmailNew: "somethidngggdfsgg@somewhere.com", // this one is to be used to check if same email can be used 
+    signupEmailNew: "somethidngggdsdfsgg@somewhere.com", // this one is to be used to check if same email can be used 
     // for multiple accounts and has to be different than the other signup account
     //because that is used in different tests
 
