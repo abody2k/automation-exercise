@@ -116,3 +116,17 @@ export async function verifyLoginwithDelete() {
     */
     return (await data.json());
 }
+
+
+export async function verifyLoginwithPost(password:string) {
+
+    let context = await newRequest();
+
+    let data = await context.post(`api/verifyLogin`,{form:{password:password}});
+    ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return (await data.json());
+}
