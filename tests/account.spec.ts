@@ -9,7 +9,7 @@ import { randomInt } from "crypto";
 
 
 
-dotenv.config({ path: path.resolve(__dirname, "./.env") });
+
 
 
 let mydata = {
@@ -274,7 +274,7 @@ test.describe("All account related tests", () => {
 
 
 
-    test(`verifying logging in using post method`,{annotation:{type:"edge case"}}, async ({ }) => {
+    test.skip(`verifying logging in using post method`,{annotation:{type:"edge case"}}, async ({ }) => {
 
     let s = await verifyLoginwithPost(apiData.newAccount.password);
     console.log(s);

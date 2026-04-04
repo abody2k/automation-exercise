@@ -3,8 +3,6 @@ import { Account } from "../pages/account.page"
 import { Header } from "../components/header.component"
 
 
-
-
 type GlobalFixture = {
 
 account : Account,
