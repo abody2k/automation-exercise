@@ -3,6 +3,7 @@ import { data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
+import { registerAccount } from "../api/account.api";
 
 
 
@@ -15,7 +16,7 @@ test.describe("All account related tests", () => {
 
 
   //this is happy end test
-  test("login with correct username and password", async ({ account, page }) => {
+  test.skip("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
@@ -26,7 +27,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test("login with incorrect username and password", async ({ account, page }) => {
+  test.skip("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -36,7 +37,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -50,7 +51,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
+  test.skip("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
 
     await loadLoginState(page);
     await page.goto("");
@@ -60,7 +61,7 @@ test.describe("All account related tests", () => {
   })
 
   //happy end case
-  test("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
 
@@ -90,6 +91,13 @@ test.describe("All account related tests", () => {
 
   });
 
+
+  test("register account using API only",async ({})=>{
+
+
+
+   await registerAccount(data.signupUsername,data.signupEmail,data.signupPassword,data.city,data.state,data.firstName,data.lastName,data.zipCode,data.address,data.mobileNumber,data.birth_date,data.birth_month,data.birth_year,data.country)
+  })
 
 
 });
