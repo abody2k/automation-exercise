@@ -87,7 +87,11 @@ export async function getUserAccountDetailByEmail(email?: string) {
 }
 
 
-
+/**
+ * it uses the email and password to update the account, they have to be part of the params
+ * @param params 
+ * @returns 
+ */
 export async function updateUserAccount(params: { name?: string, email?: string, password?: string, city?: string, state?: string, firstName?: string, lastName?: string, zipcode?: string, address1?: string, mobileNumber?: string, birth_date?: string, birth_month?: string, birth_year?: string, country?: string, title?: string, company?: string, address2?: string }) {
 
     let context = await newRequest();
