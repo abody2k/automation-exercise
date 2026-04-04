@@ -12,6 +12,22 @@ import { randomInt } from "crypto";
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
 
+let mydata = {
+  name: data.signupUsername,
+  email: data.signupEmail + randomInt(100, 1000).toString(27),
+  password: data.signupPassword, city: data.city,
+  state: data.state, firstName: data.firstName,
+  lastName: data.lastName,
+  zipcode: data.zipCode, address1: data.address,
+  mobileNumber: data.mobileNumber,
+  birth_date: data.birth_date,
+  birth_month: data.birth_month,
+  birth_year: data.birth_year,
+  country: data.country
+}
+
+
+
 test.describe("All account related tests", () => {
 
 
@@ -153,43 +169,28 @@ test.describe("All account related tests", () => {
 
   })
 
-  test.skip("registering account without passing the country", { annotation: { type: "edge case", description: "trying to make a new account without passing the country parameter" } }, async ({ }) => {
-
-
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year })
-
-    expect(context, "No country was passed yet it is ok").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
-
-  });
-
-
   test.skip("registering account with a country that is not in the list of availables countries", { annotation: { type: "edge case", description: "trying to make an account with non exsisting country in the list" } }, async ({ }) => {
 
 
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:"Iraq" })
+    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: "Iraq" })
 
     expect(context, "the country is not in the list yet it was accepted as an input").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   });
 
-    test.skip("registering account without a firstname", { annotation: { type: "edge case", description: "registering an account without sending first name" } }, async ({ }) => {
+
+  for (const [key, value] of Object.entries(mydata)) {
 
 
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state,  lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.country })
+  test(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
+    const typedKey = key as keyof typeof mydata;
+    const { [typedKey]: _, ...tempData } = mydata
+    let context = await registerAccount(tempData)
 
-    expect(context, "the firstname hasn't been sent yet the account was made").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
-
-  });
-
-
-    test.skip("registering account without a lastname", { annotation: { type: "edge case", description: "registering an account without sending last name" } }, async ({ }) => {
-
-
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.country })
-
-    expect(context, "the firstname hasn't been sent yet the account was made").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+    expect(context, `the ${key} hasn't been sent yet the account was made`).toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   });
 
-  
+}
+
 });
