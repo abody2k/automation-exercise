@@ -50,13 +50,7 @@ import { request } from "@playwright/test";
 export async function registerAccount(obj: { name?: string, email?: string, password?: string, city?: string, state?: string, firstName?: string, lastName?: string, zipcode?: string, address1?: string, mobileNumber?: string, birth_date?: string, birth_month?: string, birth_year?: string, country?: string, title?: string, company?: string, address2?: string }) {
 
 
-    let context = await request.newContext({
-        baseURL: process.env.BASE_URL, extraHTTPHeaders: {
-
-
-            // 'Content-Type': "application/json"
-        }
-    });
+    let context = await newRequest();
 
     let data = await context.post("api/createAccount", {
         form: obj
@@ -68,5 +62,12 @@ export async function registerAccount(obj: { name?: string, email?: string, pass
     */
     return (await data.json()).responseCode;
 
+
+}
+
+
+async function newRequest(){
+
+return await request.newContext({baseURL: process.env.BASE_URL, extraHTTPHeaders: {}});
 
 }
