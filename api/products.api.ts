@@ -14,6 +14,15 @@ export async function getAllProducts() {
 
 }
 
+export async function getAllbrands() {
+
+    let context = await newRequest();
+
+    let data = await context.get(`api/brandsList`);
+
+    return (await data.json());
+
+}
 
 /**
  * here goes api functions that are there only for test puoposes and are not expected
