@@ -72,7 +72,7 @@ return await request.newContext({baseURL: process.env.BASE_URL, extraHTTPHeaders
 
 }
 
-export async function getUserAccountDetailByEmail(email: string) {
+export async function getUserAccountDetailByEmail(email?: string) {
 
     let context = await newRequest();
 

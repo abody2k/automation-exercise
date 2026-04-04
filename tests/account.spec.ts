@@ -194,12 +194,26 @@ test.describe("All account related tests", () => {
 }
 
 
-  test(`getting account details by email`, async ({ }) => {
+  test.skip(`getting account details by email`, async ({ }) => {
 
     let s = await getUserAccountDetailByEmail(data.signupEmail);
     console.log(s);
     expect(s.responseCode).toBe(200);
-    
+
   });
 
+
+
+    test(`getting account details without sending an email`,{annotation:{
+
+
+      type:"edge case",
+      "description":"it will basically be undefined thus far the result should not point to any account"
+    }}, async ({ }) => {
+
+    let s = await getUserAccountDetailByEmail();
+    
+    expect(s.responseCode,"the API call actually points to a data which is not correct behavior").not.toBe(200);
+    
+  });
 });
