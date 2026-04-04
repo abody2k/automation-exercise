@@ -172,12 +172,24 @@ test.describe("All account related tests", () => {
 
   });
 
-    test.skip("registering account without a first name", { annotation: { type: "edge case", description: "registering an account without sending first name" } }, async ({ }) => {
+    test.skip("registering account without a firstname", { annotation: { type: "edge case", description: "registering an account without sending first name" } }, async ({ }) => {
 
 
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.firstName })
+    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state,  lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.country })
 
     expect(context, "the firstname hasn't been sent yet the account was made").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   });
+
+
+    test.skip("registering account without a lastname", { annotation: { type: "edge case", description: "registering an account without sending last name" } }, async ({ }) => {
+
+
+    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.country })
+
+    expect(context, "the firstname hasn't been sent yet the account was made").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+
+  });
+
+  
 });
