@@ -2,7 +2,7 @@ import { request } from "@playwright/test";
 
 
 
-export async function registerAccount(username: string, email: string, password: string, city: string, state: string, firstName: string, lastName: string, zipcode: string, address1: string, mobileNumber: string, birth_date: string, birth_month: string, birth_year: string, country: string) {
+export async function registerAccount(username: string, email: string, password: string, city: string, state: string, firstName: string, lastName: string, zipcode: string, address1: string, mobileNumber: string, birth_date: string, birth_month: string, birth_year: string, country: string, title: string, company: string, address2: string) {
 
 
     let context = await request.newContext({
@@ -30,14 +30,16 @@ export async function registerAccount(username: string, email: string, password:
             "birth_month": birth_month,
             "birth_year": birth_year,
             "mobile_number": mobileNumber,
-            // "title":"Mr",
-            // "company":"nothing",
-            // "address2":"ha ha"
+            "title": title,
+            "company": company,
+            "address2": address2
         }
     });
     // console.log(data);
-    
-    console.log(await data.text());
+
+    return data;
 
 
 }
+
+

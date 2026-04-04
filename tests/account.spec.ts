@@ -94,9 +94,9 @@ test.describe("All account related tests", () => {
 
   test("register account using API only",async ({})=>{
 
+   var context = await registerAccount(data.signupUsername,data.signupEmail,data.signupPassword,data.city,data.state,data.firstName,data.lastName,data.zipCode,data.address,data.mobileNumber,data.birth_date,data.birth_month,data.birth_year,data.country,"","","")
 
-
-   await registerAccount(data.signupUsername,data.signupEmail,data.signupPassword,data.city,data.state,data.firstName,data.lastName,data.zipCode,data.address,data.mobileNumber,data.birth_date,data.birth_month,data.birth_year,data.country)
+   await expect(context).toBeOK()
   })
 
 
