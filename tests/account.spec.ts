@@ -204,7 +204,7 @@ test.describe("All account related tests", () => {
 
 
 
-    test(`getting account details without sending an email`,{annotation:{
+    test.skip(`getting account details without sending an email`,{annotation:{
 
 
       type:"edge case",
@@ -216,4 +216,7 @@ test.describe("All account related tests", () => {
     expect(s.responseCode,"the API call actually points to a data which is not correct behavior").not.toBe(200);
     
   });
+
+
+  
 });

@@ -46,4 +46,24 @@ export const data = {
 export const apiData = {
 
 
+    updateAccount: {
+
+        firstname: "dfdg",
+        lastname: "dfgdfg",
+        address1: "fdgfg",
+        address2: "fdgfg",
+        country: "Australia",
+        state: "ddd",
+        city: "sdsd",
+        zipcode: "234324",
+        mobile_number: "23432234",
+        birth_date: "7",
+        birth_month: "7",
+        birth_year: "2000",
+        company:"deeze n",
+        title:"Mr",
+        
+
+    }
+
 }
