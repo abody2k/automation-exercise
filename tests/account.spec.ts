@@ -3,7 +3,7 @@ import { apiData, data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
-import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount, verifyLogin } from "../api/account.api";
+import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount, verifyLogin, verifyLoginwithDelete } from "../api/account.api";
 import { randomInt } from "crypto";
 
 
@@ -244,7 +244,7 @@ test.describe("All account related tests", () => {
 
 
 
-  test.skip(`logging in with valid details`, async ({ }) => {
+  test.skip(`verfiy logging in with valid details`, async ({ }) => {
 
     let s = await verifyLogin(apiData.newAccount.email,apiData.newAccount.password);
     console.log(s);
@@ -253,7 +253,7 @@ test.describe("All account related tests", () => {
 
   });
 
-  test.skip(`logging in with invalid details`, async ({ }) => {
+  test.skip(`veryfing  logging in with invalid details`, async ({ }) => {
 
     let s = await verifyLogin(apiData.newAccount.email,apiData.newAccount.password+" very wrong details");
     console.log(s);
@@ -262,4 +262,13 @@ test.describe("All account related tests", () => {
 
   });
 
+
+    test(`verifying logging in using delete method`,{annotation:{type:"edge case"}}, async ({ }) => {
+
+    let s = await verifyLoginwithDelete();
+    console.log(s);
+
+    expect(s.responseCode).toBe(405);
+
+  });
 });
