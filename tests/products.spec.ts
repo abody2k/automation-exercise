@@ -4,7 +4,7 @@ import { expect, test } from "../fixtures/global.fixture";
 
 test.describe("all products tests go here", () => {
 
-    test.skip("get all products", async () => {
+    test("get all products", async () => {
 
 
         let data = await getAllProducts();
@@ -16,7 +16,7 @@ test.describe("all products tests go here", () => {
 
 
 
-    test.skip("get all products with a post", async () => {
+    test("get all products with a post", async () => {
 
 
         let data = await getAllProductsWithPost();
@@ -29,7 +29,7 @@ test.describe("all products tests go here", () => {
 
 
 
-    test.skip("get all brands", async () => {
+    test("get all brands", async () => {
 
 
         let data = await getAllbrands();
@@ -41,7 +41,7 @@ test.describe("all products tests go here", () => {
     })
 
 
-    test.skip("getting brands with put method should not work", async () => {
+    test("getting brands with put method should not work", async () => {
 
 
         let data = await getAllbrandsWithPut();
@@ -54,7 +54,7 @@ test.describe("all products tests go here", () => {
 
 
 
-    test.skip("Search for a product while providing a product name", async () => {
+    test("Search for a product while providing a product name", async () => {
 
 
         let data = await searchForProduct({ search_product: products[0] });

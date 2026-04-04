@@ -17,7 +17,7 @@ export async function registerAccount(obj: { name?: string, email?: string, pass
      * and the actualy responsecode will be in the json data which will affect
      * the tests 
     */
-    return (await data.json()).responseCode;
+    return (await data.json());
 
 
 }
