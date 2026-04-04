@@ -47,11 +47,13 @@ export const apiData = {
 
 
     updateAccount: {
-
-        firstname: "dfdg",
+        email:"somethidnggggg@somewhere.com",
+        password:"hahahaha",
+        firstname: "noice",
         lastname: "dfgdfg",
-        address1: "fdgfg",
-        address2: "fdgfg",
+        name:"haaaaaaaa      xxxxxxxx",
+        address1: "776ghjgh",
+        address2: "fdghfghgfhgfg",
         country: "Australia",
         state: "ddd",
         city: "sdsd",
@@ -62,7 +64,7 @@ export const apiData = {
         birth_year: "2000",
         company:"deeze n",
         title:"Mr",
-        
+
 
     }
 

@@ -1,9 +1,9 @@
 import path from "path";
-import { data } from "../data/account.data";
+import { apiData, data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
-import { getUserAccountDetailByEmail, registerAccount } from "../api/account.api";
+import { getUserAccountDetailByEmail, registerAccount, updateUserAccount } from "../api/account.api";
 import { randomInt } from "crypto";
 
 
@@ -194,7 +194,7 @@ test.describe("All account related tests", () => {
 }
 
 
-  test.skip(`getting account details by email`, async ({ }) => {
+  test(`getting account details by email`, async ({ }) => {
 
     let s = await getUserAccountDetailByEmail(data.signupEmail);
     console.log(s);
@@ -218,5 +218,13 @@ test.describe("All account related tests", () => {
   });
 
 
-  
+    test(`updating account`, async ({ }) => {
+
+    let s = await updateUserAccount(apiData.updateAccount);
+      console.log(s);
+      
+    expect(s.responseCode,"the API call actually points to a data which is not correct behavior").toBe(200);
+    
+  });
+
 });
