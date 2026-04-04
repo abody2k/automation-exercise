@@ -24,6 +24,18 @@ export async function getAllbrands() {
 
 }
 
+
+
+export async function searchForProduct(product : {search_product?:string}) {
+
+    let context = await newRequest();
+
+    let data = await context.post(`api/searchProduct`,{form:product});
+
+    return (await data.json());
+
+}
+
 /**
  * here goes api functions that are there only for test puoposes and are not expected
  * to give an actual result, meaning this is an negative case
