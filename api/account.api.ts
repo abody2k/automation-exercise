@@ -71,3 +71,17 @@ async function newRequest(){
 return await request.newContext({baseURL: process.env.BASE_URL, extraHTTPHeaders: {}});
 
 }
+
+export async function getUserAccountDetailByEmail(email: string) {
+
+    let context = await newRequest();
+
+    let data = await context.get(`api/getUserDetailByEmail?email=${email}`);
+    ;
+    /* we are returning a number because the response itself will always be 200
+     * and the actualy responsecode will be in the json data which will affect
+     * the tests 
+    */
+    return (await data.json());
+
+}

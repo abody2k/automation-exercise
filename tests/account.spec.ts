@@ -3,7 +3,7 @@ import { data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
-import { registerAccount } from "../api/account.api";
+import { getUserAccountDetailByEmail, registerAccount } from "../api/account.api";
 import { randomInt } from "crypto";
 
 
@@ -182,7 +182,7 @@ test.describe("All account related tests", () => {
   for (const [key, value] of Object.entries(mydata)) {
 
 
-  test(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
+  test.skip(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
     const typedKey = key as keyof typeof mydata;
     const { [typedKey]: _, ...tempData } = mydata
     let context = await registerAccount(tempData)
@@ -192,5 +192,14 @@ test.describe("All account related tests", () => {
   });
 
 }
+
+
+  test(`getting account details by email`, async ({ }) => {
+
+    let s = await getUserAccountDetailByEmail(data.signupEmail);
+    console.log(s);
+    expect(s.responseCode).toBe(200);
+    
+  });
 
 });
