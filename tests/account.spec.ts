@@ -121,11 +121,11 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmailNew + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year })
 
-    expect(context).toBe(201) // it is ok if the given data is new so the test should pass
+    expect(context.responseCode).toBe(201) // it is ok if the given data is new so the test should pass
 
     context = await registerAccount({ name: data.signupUsername, email: data.signupEmailNew + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
 
-    expect(context).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+    expect(context.responseCode).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
 
   })
 
@@ -140,7 +140,7 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.invalidBirth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
 
-    expect(context, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+    expect(context.responseCode, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   })
 
@@ -149,7 +149,7 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.invalidBirth_month, birth_year: data.birth_year, country: data.country })
 
-    expect(context, { message: "invalid month (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+    expect(context.responseCode, { message: "invalid month (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
   })
 
 
@@ -157,7 +157,7 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.invalidBirth_year, country: data.country })
 
-    expect(context, { message: "invalid year (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
+    expect(context.responseCode, { message: "invalid year (beyond normal range) should not pass the test" }).toBeGreaterThanOrEqual(400); // if it returns ok then test fails as it is not ok to make 2 accounts with the same email
   })
 
 
@@ -166,7 +166,7 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: "" })
 
-    expect(context, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+    expect(context.responseCode, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   })
 
@@ -175,7 +175,7 @@ test.describe("All account related tests", () => {
 
     let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstName: data.firstName, lastName: data.lastName, zipcode: data.zipCode, address1: data.address, mobileNumber: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: "Iraq" })
 
-    expect(context, "the country is not in the list yet it was accepted as an input").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
+    expect(context.responseCode, "the country is not in the list yet it was accepted as an input").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
   });
 
