@@ -4,10 +4,14 @@ export class Products {
 
 
     productsList: Locator
+    searchField: Locator
+    
+
 
     constructor(private page: Page) {
 
         this.productsList = page.locator(".features_items")
+        this.searchField = page.getByRole('textbox', { name: 'Search Product' })
     }
 
 
@@ -60,4 +64,24 @@ export class Products {
 
         return this.getProduct().getByText('Rs.')
     }
+
+
+    async searchForProduct(productName: string) {
+
+        await this.searchField.click();
+        await this.searchField.fill(productName);
+        await this.page.locator('#submit_search').click()
+
+    }
+
+    getSearchedProductsLocator(){
+
+        return this.page.getByRole('heading', { name: 'Searched Products' })
+    }
+
+    getSearchResult(searchedName:string){
+
+        return this.page.getByText(searchedName)
+    }
+
 }
