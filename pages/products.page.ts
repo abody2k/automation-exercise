@@ -55,4 +55,9 @@ export class Products {
 
         return this.getProduct().getByText('Brand:')
     }
+
+    getItemPrice() {
+
+        return this.getProduct().getByText('Rs.')
+    }
 }
