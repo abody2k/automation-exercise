@@ -18,17 +18,26 @@ export class ContactUs{
 
     }
 
-    async fillName(name : string){
+    async clickOnAndFillField(name:string,content:string){
 
-        this.page.getByRole('textbox', { name: 'Name' }).fill(name)
+        let selector = this.page.getByRole('textbox',{name:name})
+        await selector.click();
+        await selector.fill(content)
+    }
+    async fillName(name : string){
+        
+        await this.clickOnAndFillField('Name',name)
     }
 
     async fillEmail(email : string){
 
-        this.page.getByRole('textbox', { name: 'Email', exact: true })
+        await this.clickOnAndFillField('Email',email)
     }
 
+    async fillSubject(subject : string){
 
+        await this.clickOnAndFillField('Subject',subject)
+    }
 
 
 
