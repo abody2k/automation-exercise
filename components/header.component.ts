@@ -112,7 +112,7 @@ export class Header {
      * 
      */
     async goToTestCases() {
-        await this.page.getByRole('listitem').filter({ hasText: 'Cart' }).click();
+        await this.page.getByRole('listitem').filter({ hasText: 'Test Cases' }).click();
     }
 
 
