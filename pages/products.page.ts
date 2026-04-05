@@ -41,4 +41,9 @@ export class Products {
 
         return this.getProduct().locator('#quantity')
     }
+
+    getItemAvailability(){
+
+        return this.getProduct().getByText('Availability:')
+    }
 }
