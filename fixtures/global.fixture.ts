@@ -1,7 +1,7 @@
 import {test as base} from "@playwright/test"
 import { Account } from "../pages/account.page"
 import { Header } from "../components/header.component"
-import { ContactUs } from "../pages/contactUs.pages"
+import { ContactUs } from "../pages/contact-us.pages"
 
 
 type GlobalFixture = {
@@ -26,7 +26,7 @@ export const test = base.extend<GlobalFixture>({
         await use(new Header(page))
     },
 
-    
+
     contactUs: async({page},use)=>{
 
         await use(new ContactUs(page));
