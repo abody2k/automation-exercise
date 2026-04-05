@@ -1,5 +1,4 @@
 import { Locator, Page } from "@playwright/test";
-import { Header } from "../components/header.component";
 import path from "path";
 
 export class ContactUs {
@@ -53,5 +52,9 @@ export class ContactUs {
 
     async submit() {
         await this.page.getByRole('button', { name: 'Submit' }).click()
+    }
+
+    async goHome() {
+        await this.page.getByRole('link', { name: ' Home' }).click();
     }
 }
