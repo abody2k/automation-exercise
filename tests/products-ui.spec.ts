@@ -1,3 +1,4 @@
+import { search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
@@ -35,9 +36,9 @@ test.describe("All products UI tests goes here", () => {
     test("Verifying if searching for a product actually works", async ({ prodcuts, page, header }) => {
 
         await goToProductsThroughHome({ page, header });
-        await prodcuts.searchForProduct("Dress") // assuming dress already exist
+        await prodcuts.searchForProduct(search) // assuming dress already exist
         await expect(prodcuts.getSearchedProductsLocator()).toBeVisible();
-        expect(await prodcuts.getSearchResult("Dress").count()).toBeGreaterThanOrEqual(1)
+        expect(await prodcuts.getSearchResult(search).count()).toBeGreaterThanOrEqual(1)
 
     })
 })
