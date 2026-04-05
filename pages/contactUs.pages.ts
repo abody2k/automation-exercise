@@ -33,7 +33,12 @@ export class ContactUs {
 
     async fillEmail(email: string) {
 
-        await this.clickOnAndFillField('Email', email)
+        let selector = this.page.getByRole('textbox', { name: "Email", exact:true })
+        await selector.click();
+        await selector.fill(email)
+
+        //we did not use fill function with Email because there are 2 results and
+        //we have to use the exact param to get what we want
     }
 
     async fillSubject(subject: string) {
@@ -41,12 +46,20 @@ export class ContactUs {
         await this.clickOnAndFillField('Subject', subject)
     }
 
+    async fillMsg(msg: string) {
 
-    async uploadFile(file: File) {
+        await this.clickOnAndFillField('Your Message Here', msg)
+    }
+
+    /**
+     * 
+     * @param filePath file path has to be relative to the file executing the code
+     */
+    async uploadFile(filePath: string) {
 
         let selector = this.page.getByRole('button', { name: 'Choose File' })
         await selector.click()
-        await selector.setInputFiles(path.resolve(__dirname, "icon.ico"))
+        await selector.setInputFiles(path.resolve(__dirname, filePath))
     }
 
 
