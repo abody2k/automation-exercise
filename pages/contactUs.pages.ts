@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { Header } from "../components/header.component";
+import path from "path";
 
 export class ContactUs{
 
@@ -37,6 +38,14 @@ export class ContactUs{
     async fillSubject(subject : string){
 
         await this.clickOnAndFillField('Subject',subject)
+    }
+
+
+    async uploadFile(file:File){
+
+        let selector = this.page.getByRole('button', { name: 'Choose File' })
+        await selector.click()
+        selector.setInputFiles(path.resolve(__dirname,"icon.ico"))
     }
 
 
