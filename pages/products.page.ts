@@ -37,4 +37,8 @@ export class Products {
         return this.getProduct().getByText("Category")
     }
 
+    getItemQuantity(){
+
+        return this.getProduct().locator('#quantity')
+    }
 }
