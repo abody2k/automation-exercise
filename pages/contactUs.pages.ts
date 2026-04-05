@@ -1,19 +1,33 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { Header } from "../components/header.component";
 
 export class ContactUs{
 
+
+
+    getInTouch : Locator
+    
     constructor(private page : Page){
 
-
+        this.getInTouch = this.page.getByText("Get In Touch")
     }
 
-    async goto(header:Header){
+    async goto(){
 
         await this.page.goto(process.env.BASE_URL);
-        await header.goToContactUs();
 
     }
+
+    async fillName(name : string){
+
+        this.page.getByRole('textbox', { name: 'Name' }).fill(name)
+    }
+
+
+
+
+
+
 
 
 
