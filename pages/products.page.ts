@@ -16,10 +16,25 @@ export class Products {
         await this.page.getByRole('link', { name: ' View Product' }).first().click();
     }
 
+    /**
+     * helper function
+     * used to get the product in product details page
+     * (this function returns the box only and is to be used by other functions only)
+     */
+    getProduct(){
+
+        return this.page.locator(".product-information");
+    }
+
 
     getItemTitle(){
 
-        return this.page.locator(".product-information").getByRole("heading");
+        return this.getProduct().getByRole("heading");
+    }
+
+    getItemCategory(){
+
+        return this.getProduct().getByText("Category")
     }
 
 }
