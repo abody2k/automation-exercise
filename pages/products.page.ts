@@ -4,7 +4,7 @@ export class Products {
 
 
     productsList: Locator
-    
+
     constructor(private page: Page) {
 
         this.productsList = page.locator(".features_items")
@@ -21,29 +21,38 @@ export class Products {
      * used to get the product in product details page
      * (this function returns the box only and is to be used by other functions only)
      */
-    getProduct(){
+    getProduct() {
 
         return this.page.locator(".product-information");
     }
 
 
-    getItemTitle(){
+    getItemTitle() {
 
         return this.getProduct().getByRole("heading");
     }
 
-    getItemCategory(){
+    getItemCategory() {
 
         return this.getProduct().getByText("Category")
     }
 
-    getItemQuantity(){
+    getItemQuantity() {
 
         return this.getProduct().locator('#quantity')
     }
 
-    getItemAvailability(){
+    getItemAvailability() {
 
         return this.getProduct().getByText('Availability:')
+    }
+
+    getItemCondition() {
+
+        return this.getProduct().getByText('Condition:')
+    }
+    getItemBrand() {
+
+        return this.getProduct().getByText('Brand:')
     }
 }
