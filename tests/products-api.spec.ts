@@ -2,7 +2,7 @@ import { getAllbrands, getAllbrandsWithPut, getAllProducts, getAllProductsWithPo
 import { products } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 
-test.describe("all products tests go here", () => {
+test.describe("all products api tests go here", () => {
 
     test("get all products", async () => {
 
