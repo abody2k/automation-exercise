@@ -23,7 +23,10 @@ export class ContactUs{
         this.page.getByRole('textbox', { name: 'Name' }).fill(name)
     }
 
+    async fillEmail(email : string){
 
+        this.page.getByRole('textbox', { name: 'Email', exact: true })
+    }
 
 
 
