@@ -4,6 +4,7 @@ export class Products {
 
 
     productsList: Locator
+    
     constructor(private page: Page) {
 
         this.productsList = page.locator(".features_items")
@@ -13,6 +14,12 @@ export class Products {
     async clickOnFirstProduct() {
 
         await this.page.getByRole('link', { name: ' View Product' }).first().click();
+    }
+
+
+    getItemTitle(){
+
+        return this.page.locator(".product-information").getByRole("heading");
     }
 
 }
