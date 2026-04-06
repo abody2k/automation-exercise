@@ -1,4 +1,4 @@
-import { search } from "../data/products.data";
+import { brands, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
@@ -107,14 +107,20 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test("Check if brands browsing works well", async ({ products }) => {
+    test("Check if brands browsing works well", async ({ products, page }) => {
 
 
 
         await expect(products.brands).toBeVisible(); //check if it is visible
-        expect(products.brandsList?.length).toBeGreaterThan(0); // check if there is any brand at all
-        
-        
+        expect(await products.brandsListsSize()).toBeGreaterThan(0); // check if there is any brand at all
+
+        for (let i = 0; i < 2; i++) {
+            await products.clickOnBrand(brands[i]);
+
+
+            await expect(page).toHaveURL(process.env.BASE_URL + `/brand_products/${brands[i]}`)
+        }
+
 
 
     })

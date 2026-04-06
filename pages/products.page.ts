@@ -7,7 +7,6 @@ export class Products {
     searchField: Locator
     continueShopping: Locator
     brands: Locator
-    brandsList? : Locator[]
 
 
 
@@ -17,10 +16,7 @@ export class Products {
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
         this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
         this.brands = page.locator('.brands-name');
-        page.locator('.brands-name').locator('li').all().then((e)=>{
-
-            this.brandsList= e
-        })
+  
     }
 
 
@@ -224,6 +220,18 @@ export class Products {
         await items[itemIndex].locator('.cart_quantity_delete').click();
 
 
+    }
+
+
+    async clickOnBrand(brandName : string ){
+        
+        let brand = this.page.locator('.brands-name').locator("li").filter({hasText:brandName})
+        await brand.click()
+    }
+
+    async brandsListsSize(){
+
+        return await this.page.locator('.brands-name').locator('li').count()
     }
 
 
