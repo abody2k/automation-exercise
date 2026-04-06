@@ -5,6 +5,7 @@ export class Products {
 
     productsList: Locator
     searchField: Locator
+    continueShopping: Locator
 
 
 
@@ -12,6 +13,7 @@ export class Products {
 
         this.productsList = page.locator(".features_items")
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
+        this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
     }
 
 
@@ -114,7 +116,7 @@ export class Products {
 
     async clickOnContinueShopping() {
 
-        await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
+        await this.continueShopping.click();
 
     }
 

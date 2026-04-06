@@ -2,6 +2,7 @@ import { search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
+import { addProductAndWaitForAffirmationUI } from "../utils/products.util";
 
 test.describe("All products UI test.skips goes here", () => {
 
@@ -13,19 +14,19 @@ test.describe("All products UI test.skips goes here", () => {
 
     })
 
-    test.skip("Verifying all products are visible and interractable", async ({ page, header, prodcuts }) => {
+    test.skip("Verifying all products are visible and interractable", async ({ page, header, products }) => {
 
         await expect(page).toHaveURL(/.*products/);
-        await expect(prodcuts.productsList).toBeVisible();
-        await prodcuts.clickOnFirstProduct();
+        await expect(products.productsList).toBeVisible();
+        await products.clickOnFirstProduct();
         await expect(page).toHaveURL(/.*\/product_details\/1/)
-        let items = [prodcuts.getItemAvailability()
-            , prodcuts.getItemBrand()
-            , prodcuts.getItemCategory()
-            , prodcuts.getItemCondition()
-            , prodcuts.getItemPrice()
-            , prodcuts.getItemQuantity()
-            , prodcuts.getItemTitle()]
+        let items = [products.getItemAvailability()
+            , products.getItemBrand()
+            , products.getItemCategory()
+            , products.getItemCondition()
+            , products.getItemPrice()
+            , products.getItemQuantity()
+            , products.getItemTitle()]
 
         for (let i = 0; i < items.length; i++) {
 
@@ -38,27 +39,27 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test.skip("Verifying if searching for a product actually works", async ({ prodcuts, page, header }) => {
+    test.skip("Verifying if searching for a product actually works", async ({ products, page, header }) => {
 
-        await prodcuts.searchForProduct(search) // assuming dress already exist
-        await expect(prodcuts.getSearchedProductsLocator()).toBeVisible();
-        expect(await prodcuts.getSearchResult(search).count()).toBeGreaterThanOrEqual(1)
+        await products.searchForProduct(search) // assuming dress already exist
+        await expect(products.getSearchedProductsLocator()).toBeVisible();
+        expect(await products.getSearchResult(search).count()).toBeGreaterThanOrEqual(1)
 
     })
 
 
-    test.skip("Adding 2 items to the cart and verifying that the cart contains the right info", async ({ prodcuts, page, header }) => {
+    test.skip("Adding 2 items to the cart and verifying that the cart contains the right info", async ({ products, page, header }) => {
 
 
         //the flow requires adding both the first and the second product to the cart
 
 
-        await prodcuts.addProductToCart(0);  //adding the first one
-        await prodcuts.clickOnContinueShopping();
-        await prodcuts.addProductToCart(1);  //adding the second one
-        await prodcuts.viewCartAfterAddingItem();
+        await products.addProductToCart(0);  //adding the first one
+        await products.clickOnContinueShopping();
+        await products.addProductToCart(1);  //adding the second one
+        await products.viewCartAfterAddingItem();
         await expect(page).toHaveURL(/.*\/view_cart/)
-        let productsInfo = await prodcuts.getInfoOfItemsInTheCart();
+        let productsInfo = await products.getInfoOfItemsInTheCart();
 
         expect(productsInfo.length).toBe(2);
 
@@ -71,21 +72,21 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, prodcuts }) => {
+    test("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, products }) => {
 
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
 
-            await prodcuts.addProductToCart(0)
-            if (i < 2)
-                await prodcuts.clickOnContinueShopping();
+            await addProductAndWaitForAffirmationUI(products,0);
+            if (i < 3)
+                await products.clickOnContinueShopping();
             else
-                await prodcuts.viewCartAfterAddingItem();
+                await products.viewCartAfterAddingItem();
         }
 
-        let items = await prodcuts.getInfoOfItemsInTheCart();
+        let items = await products.getInfoOfItemsInTheCart();
 
-        expect (items).toContainEqual(1);
+        expect (items.length).toBe(1);
         expect(items[0].productQuantity).toBe(4);
 
 

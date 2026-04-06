@@ -10,7 +10,7 @@ type GlobalFixture = {
     account: Account,
     header: Header,
     contactUs: ContactUs,
-    prodcuts: Products
+    products: Products
 
 }
 
@@ -34,7 +34,7 @@ export const test = base.extend<GlobalFixture>({
         await use(new ContactUs(page));
 
     },
-    prodcuts: async ({ page }, use) => {
+    products: async ({ page }, use) => {
 
         await use(new Products(page));
 
