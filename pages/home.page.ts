@@ -1,13 +1,16 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
-export class Home{
-
-
-    constructor(private page: Page){
+export class Home {
 
 
+    categories: Locator
+    constructor(private page: Page) {
+
+
+        this.categories = this.page.locator(".category-products")
 
     }
 
     
+
 }
