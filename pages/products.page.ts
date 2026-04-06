@@ -161,4 +161,20 @@ export class Products {
         return data;
     }
 
+
+
+
+    /**
+     * Checks if an item exists
+     * @param itemName 
+     * @returns returns true if item exists
+     */
+    doesItemExistInCart(itemName:string){
+
+        return this.page.getByText(itemName) ? true : false
+
+    }
+
+    
+
 }
