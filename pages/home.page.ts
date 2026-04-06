@@ -18,4 +18,11 @@ export class Home {
         await this.categories.getByText("Women").click();
     }
 
+    async clickOnWomenSpecificCategory(categoryName : string){
+
+        await this.categories.getByText(categoryName).click();
+
+
+    }
+
 }
