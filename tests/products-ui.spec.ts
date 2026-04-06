@@ -52,7 +52,14 @@ test.describe("All products UI tests goes here", () => {
         await prodcuts.addProductToCart(0);  //adding the first one
         await prodcuts.clickOnContinueShopping();
         await prodcuts.addProductToCart(0);  //adding the second one
-        await prodcuts.clickOnContinueShopping();
+        await prodcuts.viewCartAfterAddingItem();
+        await expect(page).toHaveURL(/.*\/view_cart/)
+        let productsInfo = await prodcuts.getInfoOfItemsInTheCart();
+
+        for (let i =0;i< productsInfo.length;i++){
+
+            expect(productsInfo[i].productQuantity! * productsInfo[i].productPrice! ).toEqual(productsInfo[i].productTotal)
+        }
 
 
     })

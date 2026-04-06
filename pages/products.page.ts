@@ -150,7 +150,7 @@ export class Products {
             productDetails.productName = await allLocators[i].locator(".cart_description").getByRole("link").textContent() ?? ""
             productDetails.productPrice = Number((await allLocators[i].locator(".cart_price").textContent())?.split(" ")[1]) ?? 0
             productDetails.productQuantity = Number((await allLocators[i].locator(".cart_quantity").textContent())) ?? 0
-            productDetails.productTotal = Number((await allLocators[i].locator(".cart_total_price").textContent())) ?? 0
+            productDetails.productTotal = Number((await allLocators[i].locator(".cart_total_price").textContent())?.split(" ")[1]) ?? 0
 
             data.push(productDetails)
 
