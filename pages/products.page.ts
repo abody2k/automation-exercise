@@ -94,7 +94,7 @@ export class Products {
      * top to bottom
      */
     getProductAddToCartByIndex(productIndex: number) {
-    // locator(".product-overlay").getByText('Add to cart').nth(productIndex) THIS IS USED TO get the overlay
+        // locator(".product-overlay").getByText('Add to cart').nth(productIndex) THIS IS USED TO get the overlay
         return this.page.locator(".productinfo").getByText("Add to cart").nth(productIndex)
     }
 
@@ -105,22 +105,58 @@ export class Products {
      * @param productIndex the index of the product from top left starting from 0
      * and ending at the bottom right as the last index
      */
-    async addProductToCart(productIndex : number){
+    async addProductToCart(productIndex: number) {
         let product = this.getProductAddToCartByIndex(productIndex);
         await product.hover();
         await this.getProductAddToCartByIndex(productIndex).click();
     }
 
 
-    async clickOnContinueShopping(){
+    async clickOnContinueShopping() {
 
         await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
 
     }
 
-    async viewCartAfterAddingItem(){
+    async viewCartAfterAddingItem() {
 
         await this.page.getByRole('link', { name: 'View Cart' }).click();
+    }
+
+    /**
+     * returns an array of objects that has name, price, quantity and total
+     */
+    async getInfoOfItemsInTheCart() {
+
+        let allLocators = await this.page.locator("tr").all()
+        if (allLocators.length > 0) {
+            allLocators = allLocators.filter((locator, index) => {
+                return index != 0;
+            })
+        }
+
+        let data = [];
+
+        for (let i = 0; i < allLocators.length; i++) {
+            const productDetails: {
+                productName?: string,
+                productPrice?: number,
+                productQuantity?: number,
+                productTotal?: number
+            } = {
+
+            }
+
+            productDetails.productName = await allLocators[i].locator(".cart_description").getByRole("link").textContent() ?? ""
+            productDetails.productPrice = Number((await allLocators[i].locator(".cart_price").textContent())?.split(" ")[1]) ?? 0
+            productDetails.productQuantity = Number((await allLocators[i].locator(".cart_quantity").textContent())) ?? 0
+            productDetails.productTotal = Number((await allLocators[i].locator(".cart_total_price").textContent())) ?? 0
+
+            data.push(productDetails)
+
+        }
+
+        return data;
     }
 
 }
