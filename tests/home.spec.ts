@@ -1,4 +1,4 @@
-import { womenCategories } from "../data/home.data";
+import { menCategories, womenCategories } from "../data/home.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goHome } from "../utils/home.util";
 
@@ -13,8 +13,12 @@ test.describe("Home tests go here", () => {
         await goHome(page);
         await expect(home.categories).toBeVisible();
         await home.clickOnWomenCategory();
-        await home.clickOnWomenSpecificCategory(womenCategories[0]);
-        
+        await home.clickOnSubCategory(womenCategories[0],"Women");
+        await expect(home.getCateogiesTitle()).toContainText(`Women - ${womenCategories[0]} Products`)
 
+        await home.clickOnMenCategory();
+        await home.clickOnSubCategory(menCategories[0],"Men");
+
+        await expect(home.getCateogiesTitle()).toContainText(`Men - ${menCategories[0]} Products`)
     })
 })

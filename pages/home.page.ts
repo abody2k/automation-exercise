@@ -17,12 +17,22 @@ export class Home {
 
         await this.categories.getByText("Women").click();
     }
+    async clickOnMenCategory() {
 
-    async clickOnWomenSpecificCategory(categoryName : string){
+        await this.categories.getByText("Men", { exact: true }).click();
+    }
 
-        await this.categories.getByText(categoryName).click();
+    async clickOnSubCategory(subCategoryName: string, category: string) {
+
+        await this.categories.locator(`#${category}`).getByText(subCategoryName).click();
 
 
+    }
+
+    getCateogiesTitle() {
+
+
+        return this.page.locator(".title");
     }
 
 }
