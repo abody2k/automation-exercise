@@ -7,6 +7,7 @@ export class Products {
     searchField: Locator
     continueShopping: Locator
     brands: Locator
+    brandsList? : Locator[]
 
 
 
@@ -16,6 +17,10 @@ export class Products {
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
         this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
         this.brands = page.locator('.brands-name');
+        page.locator('.brands-name').locator('li').all().then((e)=>{
+
+            this.brandsList= e
+        })
     }
 
 

@@ -111,7 +111,10 @@ test.describe("All products UI test.skips goes here", () => {
 
 
 
-        await expect(products.brands).toBeVisible();
+        await expect(products.brands).toBeVisible(); //check if it is visible
+        expect(products.brandsList?.length).toBeGreaterThan(0); // check if there is any brand at all
+        
+        
 
 
     })
