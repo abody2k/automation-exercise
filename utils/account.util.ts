@@ -38,6 +38,7 @@ export async function goToProductsThroughHome({ page, header }: { page: Page, he
 
     await goHome(page);
     await header.goToProducts();
+    await expect(page).toHaveURL(/.*products/)
 }
 
 
