@@ -11,6 +11,7 @@ test.describe("Home tests go here", () => {
 
         await goHome(page);
         await expect(home.categories).toBeVisible();
+        await home.clickOnWomenCategory();
 
     })
 })

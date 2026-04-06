@@ -11,6 +11,11 @@ export class Home {
 
     }
 
-    
+
+    async clickOnWomenCategory() {
+
+
+        await this.categories.getByText("Women").click();
+    }
 
 }
