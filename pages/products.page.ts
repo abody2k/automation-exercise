@@ -169,12 +169,41 @@ export class Products {
      * @param itemName 
      * @returns returns true if item exists
      */
-    doesItemExistInCart(itemName:string){
+    doesItemExistInCart(itemName: string) {
 
         return this.page.getByText(itemName) ? true : false
 
     }
 
-    
+    async getAllItemsInCart() {
 
+        let allLocators = await this.page.locator("tr").all()
+        if (allLocators.length > 0) {
+            allLocators = allLocators.filter((locator, index) => {
+                return index != 0;
+            })
+        }
+
+        return allLocators;
+
+    }
+    async removeItemFromCart(itemName: string) {
+
+        let items = await this.getAllItemsInCart();
+        for (let i = 0; i < items.length; i++) {
+
+            if (items[i].getByText(itemName)) {
+                await items[i].locator('.cart_quantity_delete').click();
+            }
+        }
+
+    }
+
+    async removeItemFromCartByIndex(itemIndex: number) {
+        let items = await this.getAllItemsInCart();
+
+        await items[itemIndex].locator('.cart_quantity_delete').click();
+
+
+    }
 }
