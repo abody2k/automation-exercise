@@ -100,6 +100,10 @@ export class Products {
         return this.page.locator(".productinfo").getByText("Add to cart").nth(productIndex)
     }
 
+    getProductAddToCartByName(productName: string) {
+        let element = this.page.locator(".productinfo").filter({ hasText: productName }).first()
+        return element.getByText("Add to cart")
+    }
 
 
     /**
@@ -110,9 +114,14 @@ export class Products {
     async addProductToCart(productIndex: number) {
         let product = this.getProductAddToCartByIndex(productIndex);
         await product.hover();
-        await this.getProductAddToCartByIndex(productIndex).click();
+        await product.click();
     }
 
+    async addProductToCartByName(productName: string) {
+        let product = this.getProductAddToCartByName(productName);
+        await product.hover();
+        await product.click();
+    }
 
     async clickOnContinueShopping() {
 
@@ -170,10 +179,13 @@ export class Products {
      * @returns returns true if item exists
      */
     doesItemExistInCart(itemName: string) {
-
-        return this.page.getByText(itemName) ? true : false
+        
+        return this.page.locator("tr").filter({hasText:itemName}).first()
 
     }
+
+
+
 
     async getAllItemsInCart() {
 

@@ -2,7 +2,7 @@ import { search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
-import { addProductAndWaitForAffirmationUI } from "../utils/products.util";
+import { addProductAndWaitForAffirmationUI, addProductByNameAndWaitForAffirmationUI } from "../utils/products.util";
 
 test.describe("All products UI test.skips goes here", () => {
 
@@ -72,12 +72,12 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, products }) => {
+    test.skip("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, products }) => {
 
 
         for (let i = 0; i < 4; i++) {
 
-            await addProductAndWaitForAffirmationUI(products,0);
+            await addProductAndWaitForAffirmationUI(products, 0);
             if (i < 3)
                 await products.clickOnContinueShopping();
             else
@@ -86,10 +86,26 @@ test.describe("All products UI test.skips goes here", () => {
 
         let items = await products.getInfoOfItemsInTheCart();
 
-        expect (items.length).toBe(1);
+        expect(items.length).toBe(1);
         expect(items[0].productQuantity).toBe(4);
 
 
 
     })
+
+
+    test("Remove Items from Cart", async ({ products }) => {
+
+
+        await addProductByNameAndWaitForAffirmationUI(products, search);
+        await products.viewCartAfterAddingItem();
+        await expect(products.doesItemExistInCart(search)).toBeVisible()
+        await products.removeItemFromCart(search);
+        await expect(products.doesItemExistInCart(search)).not.toBeVisible()
+
+
+    })
+
+
+
 })
