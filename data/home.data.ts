@@ -1,0 +1,1 @@
+export const womenCategories = ["DRESS","TOPS","SAREE"]
