@@ -6,6 +6,7 @@ export class Products {
     productsList: Locator
     searchField: Locator
     continueShopping: Locator
+    brands: Locator
 
 
 
@@ -14,6 +15,7 @@ export class Products {
         this.productsList = page.locator(".features_items")
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
         this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
+        this.brands = page.locator('.brands-name');
     }
 
 
@@ -179,8 +181,8 @@ export class Products {
      * @returns returns true if item exists
      */
     doesItemExistInCart(itemName: string) {
-        
-        return this.page.locator("tr").filter({hasText:itemName}).first()
+
+        return this.page.locator("tr").filter({ hasText: itemName }).first()
 
     }
 
@@ -218,4 +220,7 @@ export class Products {
 
 
     }
+
+
+
 }

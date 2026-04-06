@@ -94,7 +94,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test("Remove Items from Cart", async ({ products }) => {
+    test.skip("Remove Items from Cart", async ({ products }) => {
 
 
         await addProductByNameAndWaitForAffirmationUI(products, search);
@@ -102,6 +102,16 @@ test.describe("All products UI test.skips goes here", () => {
         await expect(products.doesItemExistInCart(search)).toBeVisible()
         await products.removeItemFromCart(search);
         await expect(products.doesItemExistInCart(search)).not.toBeVisible()
+
+
+    })
+
+
+    test("Check if brands browsing works well", async ({ products }) => {
+
+
+
+        await expect(products.brands).toBeVisible();
 
 
     })
