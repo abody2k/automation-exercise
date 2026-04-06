@@ -41,4 +41,19 @@ test.describe("All products UI tests goes here", () => {
         expect(await prodcuts.getSearchResult(search).count()).toBeGreaterThanOrEqual(1)
 
     })
+
+
+    test("Adding 2 items to the cart and verifying that the cart contains the right info", async ({ prodcuts, page, header }) => {
+
+
+        //the flow requires adding both the first and the second product to the cart
+
+        await goToProductsThroughHome({ page, header });
+        await prodcuts.addProductToCart(0);  //adding the first one
+        await prodcuts.clickOnContinueShopping();
+        await prodcuts.addProductToCart(0);  //adding the second one
+        await prodcuts.clickOnContinueShopping();
+
+
+    })
 })

@@ -94,19 +94,33 @@ export class Products {
      * top to bottom
      */
     getProductAddToCartByIndex(productIndex: number) {
-
-        return this.page.locator(".product-overlay").getByText('Add to cart').nth(productIndex)
+    // locator(".product-overlay").getByText('Add to cart').nth(productIndex) THIS IS USED TO get the overlay
+        return this.page.locator(".productinfo").getByText("Add to cart").nth(productIndex)
     }
 
 
-    
+
     /**
      * click on add to cart, assumes you are already in the products page
      * @param productIndex the index of the product from top left starting from 0
      * and ending at the bottom right as the last index
      */
     async addProductToCart(productIndex : number){
+        let product = this.getProductAddToCartByIndex(productIndex);
+        await product.hover();
         await this.getProductAddToCartByIndex(productIndex).click();
+    }
+
+
+    async clickOnContinueShopping(){
+
+        await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
+
+    }
+
+    async viewCartAfterAddingItem(){
+
+        await this.page.getByRole('link', { name: 'View Cart' }).click();
     }
 
 }
