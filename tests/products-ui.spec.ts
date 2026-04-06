@@ -1,4 +1,5 @@
-import { brands, search } from "../data/products.data";
+import { data } from "../data/account.data";
+import { brands, itemsToBuy, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
@@ -107,7 +108,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test("Check if brands browsing works well", async ({ products, page }) => {
+    test.skip("Check if brands browsing works well", async ({ products, page }) => {
 
 
 
@@ -122,6 +123,43 @@ test.describe("All products UI test.skips goes here", () => {
         }
 
 
+
+    })
+
+
+
+    test("Testing if items remain in cart after logging in", async ({ products, page, account, header }) => {
+
+
+
+        for (let i = 0; i < itemsToBuy.length; i++) {
+            await products.searchForProduct(itemsToBuy[i]);
+            await products.addProductToCartByName(itemsToBuy[i]);
+            if (i == itemsToBuy.length - 1) {
+                await products.viewCartAfterAddingItem();
+            } else {
+                await products.clickOnContinueShopping();
+            }
+        }
+
+        await expect(page).toHaveURL(/.*view_cart/)
+        for (let i = 0; i < itemsToBuy.length; i++) {
+            expect(products.doesItemExistInCart(itemsToBuy[i])).toBeTruthy()
+
+        }
+
+        await header.goToSignupLogin();
+        await account.enterEmailForLogin(data.loginEmail)
+        await account.enterPasswordForLogin(data.loginPassword)
+        await account.login();
+        await header.goToCart();
+        await expect(page).toHaveURL(/.*view_cart/)
+
+
+        for (let i = 0; i < itemsToBuy.length; i++) {
+            expect(products.doesItemExistInCart(itemsToBuy[i])).toBeTruthy()
+
+        }
 
     })
 

@@ -7,8 +7,8 @@
  */
 export const data = {
 
-    loginEmail: "goodman@fake-email.com",// these info here are vaild
-    loginPassword: ",*F-4#f%~vC-ZCB",// these info here are vaild,
+    loginEmail: "newaccountg@somewhere.com",// these info here are vaild
+    loginPassword: "hahahaha",// these info here are vaild,
     incorrectLoginEmail: "12@s",
     incorrectLoginPassword: "12@s",
     signupEmail: "somethidnggggg@somewhere.com",
@@ -55,7 +55,7 @@ export const apiData = {
     },
 
     newAccount: {
-        email: "somethidnggggg@somewhere.com",
+        email: "newaccountg@somewhere.com",
         password: "hahahaha",
         firstname: "noice",
         lastname: "dfgdfg",
