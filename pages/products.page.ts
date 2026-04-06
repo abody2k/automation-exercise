@@ -5,7 +5,7 @@ export class Products {
 
     productsList: Locator
     searchField: Locator
-    
+
 
 
     constructor(private page: Page) {
@@ -74,14 +74,39 @@ export class Products {
 
     }
 
-    getSearchedProductsLocator(){
+    getSearchedProductsLocator() {
 
         return this.page.getByRole('heading', { name: 'Searched Products' })
     }
 
-    getSearchResult(searchedName:string){
+    getSearchResult(searchedName: string) {
 
         return this.page.getByText(searchedName)
+    }
+
+
+
+    /**
+     * 
+     * returns the product from the product list
+     * it assumes you are already there in products page and have visible products
+     * @param productIndex represents the order of the product from left to right
+     * top to bottom
+     */
+    getProductAddToCartByIndex(productIndex: number) {
+
+        return this.page.locator(".product-overlay").getByText('Add to cart').nth(productIndex)
+    }
+
+
+    
+    /**
+     * click on add to cart, assumes you are already in the products page
+     * @param productIndex the index of the product from top left starting from 0
+     * and ending at the bottom right as the last index
+     */
+    async addProductToCart(productIndex : number){
+        await this.getProductAddToCartByIndex(productIndex).click();
     }
 
 }
