@@ -16,7 +16,7 @@ export class Products {
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
         this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
         this.brands = page.locator('.brands-name');
-  
+
     }
 
 
@@ -223,17 +223,23 @@ export class Products {
     }
 
 
-    async clickOnBrand(brandName : string ){
-        
-        let brand = this.page.locator('.brands-name').locator("li").filter({hasText:brandName})
+    async clickOnBrand(brandName: string) {
+
+        let brand = this.page.locator('.brands-name').locator("li").filter({ hasText: brandName })
         await brand.click()
     }
 
-    async brandsListsSize(){
+    async brandsListsSize() {
 
         return await this.page.locator('.brands-name').locator('li').count()
     }
 
 
+
+    async viewProduct(productName: string) {
+
+        let element = this.page.locator(".productinfo").filter({ hasText: productName }).first()
+        await element.getByRole('link', { name: ' View Product' }).click()
+    }
 
 }
