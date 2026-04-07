@@ -1,4 +1,5 @@
 import { menCategories, womenCategories } from "../data/home.data";
+import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goHome } from "../utils/home.util";
 
@@ -30,7 +31,9 @@ test.describe("Home tests go here", () => {
     test("adding products from recommendation section", async ({home,products }) => {
 
         await home.scrollToBottomOfPage()
-        
-
+        await expect(home.getRecommendedItems()).toBeVisible();
+        await products.addProductToCartFromHomePageRecommendations(productsNames[0])
+        await products.viewCartAfterAddingItem()
+        expect(products.doesItemExistInCart(productsNames[0])).toBeTruthy()
     })
 })
