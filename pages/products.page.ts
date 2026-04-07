@@ -242,9 +242,15 @@ export class Products {
         await element.getByRole('link', { name: ' View Product' }).click()
     }
 
-    returnWriteYourReview(){
+    returnWriteYourReview() {
 
         return this.page.getByRole('link', { name: 'Write Your Review' })
+    }
+
+    async fillReviewName(name: string) {
+
+        await this.page.getByRole('textbox', { name: 'Your Name' }).fill(name);
+
     }
 
 }

@@ -170,6 +170,7 @@ test.describe("All products UI test.skips goes here", () => {
 
 
         await products.viewProduct(productsNames[0]);
+        await expect(products.returnWriteYourReview()).toBeVisible();
         
     })
 
