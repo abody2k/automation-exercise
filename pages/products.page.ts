@@ -253,4 +253,12 @@ export class Products {
 
     }
 
+    async fillReviewEmail(email: string) {
+        await this.page.getByRole('textbox', { name: 'Email Address', exact: true }).fill(email)
+
+
+    }
+
+
+    
 }
