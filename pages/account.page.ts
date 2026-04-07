@@ -10,7 +10,7 @@ export class Account {
     signupUsername: Locator
     signupEmail: Locator
     signupDuplicatedEmailMsg: Locator
-
+    loggedInLabel:Locator
 
 
 
@@ -22,6 +22,7 @@ export class Account {
         this.signupEmail = page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address')
         this.signupUsername = page.getByRole('textbox', { name: 'Name' })
         this.signupDuplicatedEmailMsg = page.getByText('Email Address already exist!')
+        this.loggedInLabel = page.getByText("Logged in as")
     }
 
     /**
@@ -203,6 +204,12 @@ export class Account {
 
 
         await this.page.getByRole('button', { name: 'Create Account' }).click();
+    }
+
+
+    async clickOnContinueAfterMakingAccount(){
+
+        this.page.getByText("Continue").first().click();
     }
 
 

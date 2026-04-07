@@ -1,6 +1,6 @@
 import { data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
 
 
@@ -79,7 +79,7 @@ test.describe("All account UI related tests", () => {
 
     await goToLoginSingup(page, account);
 
-
+    await makeNewAccount(account, page);
     //save login info because after making new account you are automatically signed in
     await saveCurrentLoginState(page);
 
@@ -88,10 +88,13 @@ test.describe("All account UI related tests", () => {
 
 
   //This is case 23
-  test("Verify address details in checkout page after making an account", async ({ home, header, account }) => {
+  test("Verify address details in checkout page after making an account", async ({ home, header, account, page }) => {
 
     await home.goHome();
     await header.goToSignupLogin();
+    await makeNewAccount(account, page);
+    await expect(account.loggedInLabel).toBeVisible();
+    
 
   })
 
