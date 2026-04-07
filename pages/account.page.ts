@@ -10,8 +10,8 @@ export class Account {
     signupUsername: Locator
     signupEmail: Locator
     signupDuplicatedEmailMsg: Locator
-    loggedInLabel:Locator
-
+    loggedInLabel: Locator
+    accountDeletedMsg: Locator
 
 
     constructor(private page: Page) {
@@ -23,6 +23,8 @@ export class Account {
         this.signupUsername = page.getByRole('textbox', { name: 'Name' })
         this.signupDuplicatedEmailMsg = page.getByText('Email Address already exist!')
         this.loggedInLabel = page.getByText("Logged in as")
+        this.accountDeletedMsg = page.getByText('Account Deleted!')
+
     }
 
     /**
@@ -172,7 +174,7 @@ export class Account {
 
     }
 
-    
+
     async enterState(state: string) {
 
         await this.page.getByRole('textbox', { name: 'State *' }).click();
@@ -207,9 +209,15 @@ export class Account {
     }
 
 
-    async clickOnContinueAfterMakingAccount(){
+    async clickOnContinueAfterMakingAccount() {
 
         this.page.getByText("Continue").first().click();
+    }
+
+
+    async clickOnContinueAfterDeletingTheAccount() {
+
+        await this.page.getByText('Continue').first().click();
     }
 
 

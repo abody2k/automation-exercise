@@ -116,6 +116,8 @@ test.describe("All account UI related test.skips", () => {
       checkout.changeAddress();
     }
 
+    await header.DeleteAccount();
+    
 
   })
 
