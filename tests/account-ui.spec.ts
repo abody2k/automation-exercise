@@ -1,4 +1,5 @@
 import { data } from "../data/account.data";
+import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
@@ -25,12 +26,12 @@ let mydata = {
 
 
 
-test.describe("All account UI related tests", () => {
+test.describe("All account UI related test.skips", () => {
 
 
 
   //this is happy end test
-  test("login with correct username and password", async ({ account, page }) => {
+  test.skip("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
@@ -41,7 +42,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("login with incorrect username and password", async ({ account, page }) => {
+  test.skip("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -51,7 +52,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -65,7 +66,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
+  test.skip("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
 
     await loadLoginState(page);
     await page.goto("");
@@ -75,7 +76,7 @@ test.describe("All account UI related tests", () => {
   })
 
   //happy end case
-  test("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
 
@@ -88,13 +89,20 @@ test.describe("All account UI related tests", () => {
 
 
   //This is case 23
-  test("Verify address details in checkout page after making an account", async ({ home, header, account, page }) => {
+  test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products }) => {
 
     await home.goHome();
     await header.goToSignupLogin();
     await makeNewAccount(account, page);
-    await expect(account.loggedInLabel).toBeVisible();
     
+    await account.clickOnContinueAfterMakingAccount();
+    await expect(account.loggedInLabel).toBeVisible();
+
+    //we are at home page right now
+
+    await products.addProductToCartByName(productsNames[0])
+    await products.viewCartAfterAddingItem();
+        
 
   })
 

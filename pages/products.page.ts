@@ -283,4 +283,10 @@ export class Products {
 
         await this.page.locator("#recommended-item-carousel").locator(".single-products").filter({ hasText: productName }).first().getByText("add to cart").click()
     }
+
+
+    async clickOnProceedToCheckout() {
+
+        await this.page.getByText("Proceed To Checkout").click();
+    }
 }
