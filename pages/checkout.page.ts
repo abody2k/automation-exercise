@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
 
-export class Checkout{
+export class Checkout {
 
-    addressDelivery : Locator
-    constructor(private page: Page){
+    addressDelivery: Locator
+    constructor(private page: Page) {
 
         this.addressDelivery = page.locator("#address_delivery")
     }
@@ -12,16 +12,22 @@ export class Checkout{
      * it is going to be separated by space as in firstname lastname
      * @returns locator of the corresponding field
      */
-    getFirstNameLastNameInDeliveryAddress(){
+    getFirstNameLastNameInDeliveryAddress() {
 
 
         return this.addressDelivery.locator(".address_firstname")
     }
 
-    getCityStatePostcodeInDeliveryAddress(){
+    getCityStatePostcodeInDeliveryAddress() {
 
 
         return this.addressDelivery.locator(".address_city")
     }
 
+
+    getCountryInDeliveryAddress() {
+
+
+        return this.addressDelivery.locator(".address_country_name")
+    }
 }
