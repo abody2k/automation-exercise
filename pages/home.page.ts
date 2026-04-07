@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import process from "process";
 
 export class Home {
 
@@ -11,6 +12,10 @@ export class Home {
 
     }
 
+    async goHome() {
+
+        await this.page.goto(process.env.BASE_URL)
+    }
 
     async clickOnWomenCategory() {
 
@@ -33,6 +38,18 @@ export class Home {
 
 
         return this.page.locator(".title");
+    }
+
+
+    async scrollToBottomOfPage() {
+
+        await this.page.locator('.footer-bottom').scrollIntoViewIfNeeded()
+    }
+
+
+    getRecommendedItems() {
+
+        return this.page.getByRole('heading', { name: 'recommended items' })
     }
 
 }

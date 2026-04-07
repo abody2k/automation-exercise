@@ -16,7 +16,7 @@ export class Products {
         this.searchField = page.getByRole('textbox', { name: 'Search Product' })
         this.continueShopping = this.page.getByRole('button', { name: 'Continue Shopping' })
         this.brands = page.locator('.brands-name');
-  
+
     }
 
 
@@ -223,17 +223,70 @@ export class Products {
     }
 
 
-    async clickOnBrand(brandName : string ){
-        
-        let brand = this.page.locator('.brands-name').locator("li").filter({hasText:brandName})
+    async clickOnBrand(brandName: string) {
+
+        let brand = this.page.locator('.brands-name').locator("li").filter({ hasText: brandName })
         await brand.click()
     }
 
-    async brandsListsSize(){
+    async brandsListsSize() {
 
         return await this.page.locator('.brands-name').locator('li').count()
     }
 
 
 
+    async viewProduct(productName: string) {
+
+        let element = this.page.locator(".product-image-wrapper").filter({ hasText: productName }).first().locator(".choose")
+        await element.getByRole('link', { name: ' View Product' }).click()
+    }
+
+    returnWriteYourReview() {
+
+        return this.page.getByRole('link', { name: 'Write Your Review' })
+    }
+
+    async fillReviewName(name: string) {
+
+        await this.page.getByRole('textbox', { name: 'Your Name' }).fill(name);
+
+    }
+
+    async fillReviewEmail(email: string) {
+        await this.page.getByRole('textbox', { name: 'Email Address', exact: true }).fill(email)
+
+
+    }
+
+    async fillReviewMsg(message: string) {
+        await this.page.getByRole('textbox', { name: 'Add Review Here!' }).fill(message)
+
+    }
+
+
+    async submitReview() {
+
+        await this.page.getByRole('button', { name: 'Submit' }).click()
+    }
+
+    /**
+     * this is to be used after submitting a review
+     * it appears for a few seconds only
+     */
+    getSuccessMessage() {
+        return this.page.locator('.alert-success').filter({ hasText: "Thank you for" })
+    }
+
+
+    async addProductToCartFromHomePageRecommendations(productName: string) {
+
+        await this.page.locator("#recommended-item-carousel").locator(".single-products").filter({ hasText: productName }).first().getByText("add to cart").click()
+    }
+
+
+    async clickOnProceedToCheckout() {
+
+        await this.page.getByText("Proceed To Checkout").click();
+    }
 }

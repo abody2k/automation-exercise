@@ -4,6 +4,7 @@ import { Account } from "../pages/account.page";
 import path from "path";
 import { goHome } from "./home.util";
 import { Header } from "../components/header.component";
+import { data } from "../data/account.data";
 
 
 
@@ -58,4 +59,29 @@ export async function saveCurrentLoginState(page: Page) {
 export async function loadLoginState(page: Page) {
     await page.context().setStorageState(path.resolve(__dirname, "../data/login.data.json"))
     // test.use({ storageState: path.resolve(__dirname, "../data/login.data.json") })
+}
+
+
+
+export async function makeNewAccount(account: Account, page: Page) {
+    await account.enterSignupEmail(data.signupEmail);
+    await account.enterSignupUsername(data.signupUsername);
+    await account.clickOnSignup(); //clicking here navigates the user to a new page
+
+    await expect(page).toHaveURL(/.*signup/);
+
+    await account.enterFirstName(data.firstName)
+    await account.enterLastName(data.lastName)
+    await account.enterSignupPassword(data.signupPassword)
+    await account.enterAddress(data.address)
+    await account.enterCity(data.city)
+    await account.enterState(data.state);
+    await account.enterZipCode(data.zipCode)
+    await account.enterMobileNumber(data.mobileNumber)
+    await account.selectCountry(data.country)
+    await account.pickDay(data.birth_date)
+    await account.pickMonth(data.birth_month)
+    await account.pickyear(data.birth_year)
+    await account.createAccount();
+    await expect(page).toHaveURL(/.*account_created/)
 }

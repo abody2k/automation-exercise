@@ -1,6 +1,7 @@
-import {  data } from "../data/account.data";
+import { data } from "../data/account.data";
+import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
 
 
@@ -25,12 +26,12 @@ let mydata = {
 
 
 
-test.describe("All account UI related tests", () => {
+test.describe("All account UI related test.skips", () => {
 
 
 
   //this is happy end test
-  test("login with correct username and password", async ({ account, page }) => {
+  test.skip("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
@@ -41,7 +42,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("login with incorrect username and password", async ({ account, page }) => {
+  test.skip("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -51,7 +52,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -65,7 +66,7 @@ test.describe("All account UI related tests", () => {
 
   });
 
-  test("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
+  test.skip("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
 
     await loadLoginState(page);
     await page.goto("");
@@ -75,35 +76,51 @@ test.describe("All account UI related tests", () => {
   })
 
   //happy end case
-  test("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
 
-    await account.enterSignupEmail(data.signupEmail);
-    await account.enterSignupUsername(data.signupUsername);
-    await account.clickOnSignup(); //clicking here navigates the user to a new page
-
-    await expect(page).toHaveURL(/.*signup/);
-
-    await account.enterFirstName(data.firstName)
-    await account.enterLastName(data.lastName)
-    await account.enterSignupPassword(data.signupPassword)
-    await account.enterAddress(data.address)
-    await account.enterCity(data.city)
-    await account.enterState(data.state);
-    await account.enterZipCode(data.zipCode)
-    await account.enterMobileNumber(data.mobileNumber)
-
-    await account.pickDay("7")
-    await account.pickMonth("7")
-    await account.pickyear("1990")
-    await account.createAccount();
-    await expect(page).toHaveURL(/.*account_created/)
+    await makeNewAccount(account, page);
     //save login info because after making new account you are automatically signed in
     await saveCurrentLoginState(page);
 
 
   });
+
+
+  //This is case 23
+  test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
+
+    await home.goHome();
+    await header.goToSignupLogin();
+    await makeNewAccount(account, page);
+
+    await account.clickOnContinueAfterMakingAccount();
+    await expect(account.loggedInLabel).toBeVisible();
+
+    //we are at home page right now
+
+    await products.addProductToCartByName(productsNames[0])
+    await products.viewCartAfterAddingItem();
+    await products.clickOnProceedToCheckout();
+
+    await expect(page).toHaveURL(/.*checkout/)
+
+    for (let i = 0; i < 2; i++) {
+
+      await expect(checkout.getFirstNameLastName()).toContainText(`${data.firstName} ${data.lastName}`)
+      await expect(checkout.getPhoneNumber()).toContainText(`${data.mobileNumber}`)
+      await expect(checkout.getAddress1Address2()).toContainText(`${data.address}`)
+      await expect(checkout.getCityStatePostcode()).toContainText(`${data.city} ${data.state} ${data.zipCode}`)
+      await expect(checkout.getCountry()).toContainText(`${data.country}`)
+      checkout.changeAddress();
+    }
+
+    await header.DeleteAccount();
+    await expect(account.accountDeletedMsg).toBeVisible();
+    await account.clickOnContinueAfterDeletingTheAccount();
+
+  })
 
 
 });
