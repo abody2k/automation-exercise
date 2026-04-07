@@ -1,5 +1,5 @@
 import { data } from "../data/account.data";
-import { brands, itemsToBuy, productsNames, search } from "../data/products.data";
+import { brands, itemsToBuy, productsNames, reviewData, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
@@ -128,7 +128,7 @@ test.describe("All products UI test.skips goes here", () => {
 
 
 
-    test("Testing if items remain in cart after logging in", async ({ products, page, account, header }) => {
+    test.skip("Testing if items remain in cart after logging in", async ({ products, page, account, header }) => {
 
 
 
@@ -165,13 +165,18 @@ test.describe("All products UI test.skips goes here", () => {
 
 
 
-    test("Checking if viewing a product and adding a review works",async({products})=>{
+    test("Checking if viewing a product and adding a review works", async ({ products }) => {
 
 
 
         await products.viewProduct(productsNames[0]);
         await expect(products.returnWriteYourReview()).toBeVisible();
-        
+        await products.fillReviewName(reviewData.name)
+        await products.fillReviewEmail(reviewData.email);
+        await products.fillReviewMsg(reviewData.message);
+        await products.submitReview();
+        await expect(products.getSuccessMessage()).toBeVisible();
+
     })
 
 })

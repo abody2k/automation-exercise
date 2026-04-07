@@ -238,7 +238,7 @@ export class Products {
 
     async viewProduct(productName: string) {
 
-        let element = this.page.locator(".productinfo").filter({ hasText: productName }).first()
+        let element = this.page.locator(".product-image-wrapper").filter({ hasText: productName }).first().locator(".choose")
         await element.getByRole('link', { name: ' View Product' }).click()
     }
 
