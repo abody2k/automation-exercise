@@ -264,4 +264,9 @@ export class Products {
 
     }
 
+
+    async submitReview(){
+
+        await this.page.getByRole('button', { name: 'Submit' }).click()
+    }
 }
