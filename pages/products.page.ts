@@ -242,4 +242,9 @@ export class Products {
         await element.getByRole('link', { name: ' View Product' }).click()
     }
 
+    returnWriteYourReview(){
+
+        return this.page.getByRole('link', { name: 'Write Your Review' })
+    }
+
 }
