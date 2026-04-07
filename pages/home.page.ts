@@ -35,4 +35,10 @@ export class Home {
         return this.page.locator(".title");
     }
 
+
+    async scrollToBottomOfPage(){
+
+        await this.page.locator('.footer-bottom').scrollIntoViewIfNeeded()
+    }
+
 }
