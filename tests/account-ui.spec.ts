@@ -104,7 +104,9 @@ test.describe("All account UI related test.skips", () => {
     await products.viewCartAfterAddingItem();
     await products.clickOnProceedToCheckout();
     
-    await expect(page).toHaveURL("www.nothing.com",{timeout:400000})
+    await expect(page).toHaveURL(/.*checkout/)
+
+    // await expect()
 
   })
 

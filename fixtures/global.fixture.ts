@@ -4,6 +4,7 @@ import { Header } from "../components/header.component"
 import { ContactUs } from "../pages/contact-us.pages"
 import { Products } from "../pages/products.page"
 import { Home } from "../pages/home.page"
+import { Checkout } from "../pages/checkout.page"
 
 
 type GlobalFixture = {
@@ -12,7 +13,8 @@ type GlobalFixture = {
     header: Header,
     contactUs: ContactUs,
     products: Products,
-    home:Home
+    home: Home,
+    checkout: Checkout,
 
 }
 
@@ -42,9 +44,14 @@ export const test = base.extend<GlobalFixture>({
 
     },
 
-    home : async({page},use)=>{
+    home: async ({ page }, use) => {
 
         await use(new Home(page))
+    },
+
+    checkout: async ({ page }, use) => {
+
+        await use(new Checkout(page))
     }
 })
 
