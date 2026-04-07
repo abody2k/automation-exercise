@@ -89,12 +89,12 @@ test.describe("All account UI related test.skips", () => {
 
 
   //This is case 23
-  test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products }) => {
+  test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
 
     await home.goHome();
     await header.goToSignupLogin();
     await makeNewAccount(account, page);
-    
+
     await account.clickOnContinueAfterMakingAccount();
     await expect(account.loggedInLabel).toBeVisible();
 
@@ -103,10 +103,19 @@ test.describe("All account UI related test.skips", () => {
     await products.addProductToCartByName(productsNames[0])
     await products.viewCartAfterAddingItem();
     await products.clickOnProceedToCheckout();
-    
+
     await expect(page).toHaveURL(/.*checkout/)
 
-    // await expect()
+    for (let i = 0; i < 2; i++) {
+
+      await expect(checkout.getFirstNameLastName()).toContainText(`${data.firstName} ${data.lastName}`)
+      await expect(checkout.getPhoneNumber()).toContainText(`${data.mobileNumber}`)
+      await expect(checkout.getAddress1Address2()).toContainText(`${data.address}`)
+      await expect(checkout.getCityStatePostcode()).toContainText(`${data.city} ${data.state} ${data.zipCode}`)
+      await expect(checkout.getCountry()).toContainText(`${data.country}`)
+      checkout.changeAddress();
+    }
+
 
   })
 

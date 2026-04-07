@@ -78,7 +78,7 @@ export async function makeNewAccount(account: Account, page: Page) {
     await account.enterState(data.state);
     await account.enterZipCode(data.zipCode)
     await account.enterMobileNumber(data.mobileNumber)
-
+    await account.selectCountry(data.country)
     await account.pickDay(data.birth_date)
     await account.pickMonth(data.birth_month)
     await account.pickyear(data.birth_year)

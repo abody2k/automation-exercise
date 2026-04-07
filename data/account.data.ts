@@ -17,23 +17,18 @@ export const data = {
 
     //the following fields are all related to signup only
 
-    firstName: "dfdg",
-    lastName: "dfgdfg",
-    address: "fdgfg",
+    firstName: "Anderson",
+    lastName: "Andy",
+    address: "Down under",
     country: "Australia",
-    state: "ddd",
-    city: "sdsd",
+    state: "One missisipi",
+    city: "Two Missisipi",
     zipCode: "234324",
     mobileNumber: "23432234",
     birth_date: "7",
     birth_month: "7",
     birth_year: "2000",
 
-    . dfdg dfgdfg
-fdgfg
-sdsd ddd 234324
-India
-23432234
 
     invalidBirth_date: "99",
     invalidBirth_month: "88",
