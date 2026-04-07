@@ -275,6 +275,12 @@ export class Products {
      * it appears for a few seconds only
      */
     getSuccessMessage() {
-        return this.page.locator('.alert-success').filter({hasText:"Thank you for"})
+        return this.page.locator('.alert-success').filter({ hasText: "Thank you for" })
+    }
+
+
+    async addProductToCartFromHomePageRecommendations(productName: string) {
+
+        await this.page.locator("#recommended-item-carousel").locator(".single-products").filter({ hasText: productName }).getByText("add to cart").click()
     }
 }
