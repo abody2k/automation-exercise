@@ -1,4 +1,4 @@
-import {  data } from "../data/account.data";
+import { data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
@@ -104,6 +104,13 @@ test.describe("All account UI related tests", () => {
 
 
   });
+
+
+  //This is case 23
+  test("Verify address details in checkout page after making an account", async ({ home, header, account }) => {
+
+    await home.go
+  })
 
 
 });
