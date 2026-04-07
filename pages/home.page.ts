@@ -41,4 +41,10 @@ export class Home {
         await this.page.locator('.footer-bottom').scrollIntoViewIfNeeded()
     }
 
+
+    getRecommendedItems(){
+
+        return this.page.getByRole('heading', { name: 'recommended items' })
+    }
+
 }
