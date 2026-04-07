@@ -15,19 +15,31 @@ export class Checkout {
     getFirstNameLastNameInDeliveryAddress() {
 
 
-        return this.addressDelivery.locator(".address_firstname")
+        return this.getLocatorUsingAddressDelivery(".address_firstname")
     }
 
     getCityStatePostcodeInDeliveryAddress() {
 
 
-        return this.addressDelivery.locator(".address_city")
+        return this.getLocatorUsingAddressDelivery(".address_city")
     }
 
 
     getCountryInDeliveryAddress() {
 
 
-        return this.addressDelivery.locator(".address_country_name")
+        return this.getLocatorUsingAddressDelivery(".address_country_name")
+    }
+
+    getPhoneNumberInDeliveryAddress() {
+
+
+        return this.getLocatorUsingAddressDelivery(".address_phone")
+    }
+
+
+    getLocatorUsingAddressDelivery(locator_class: string) {
+
+        return this.addressDelivery.locator(locator_class)
     }
 }
