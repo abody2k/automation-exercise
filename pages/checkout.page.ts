@@ -1,15 +1,22 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class Checkout{
 
+    addressDelivery : Locator
     constructor(private page: Page){
 
+        this.addressDelivery = page.locator("#address_delivery")
     }
 
     getFirstNameInDeliveryAddress(){
 
 
-        return this.page.locator("#address_delivery").locator(".address_firstname")
+        return this.addressDelivery.locator(".address_firstname")
+    }
+    getastNameInDeliveryAddress(){
+
+
+        return this.addressDelivery.locator(".address_lastname")
     }
 
 
