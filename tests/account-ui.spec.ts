@@ -117,7 +117,8 @@ test.describe("All account UI related test.skips", () => {
     }
 
     await header.DeleteAccount();
-    
+    await expect(account.accountDeletedMsg).toBeVisible();
+    await account.clickOnContinueAfterDeletingTheAccount();
 
   })
 
