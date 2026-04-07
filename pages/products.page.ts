@@ -281,6 +281,6 @@ export class Products {
 
     async addProductToCartFromHomePageRecommendations(productName: string) {
 
-        await this.page.locator("#recommended-item-carousel").locator(".single-products").filter({ hasText: productName }).getByText("add to cart").click()
+        await this.page.locator("#recommended-item-carousel").locator(".single-products").filter({ hasText: productName }).first().getByText("add to cart").click()
     }
 }
