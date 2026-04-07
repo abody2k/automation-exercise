@@ -259,6 +259,9 @@ export class Products {
 
     }
 
+    async fillReviewMsg(message: string) {
+        await this.page.getByRole('textbox', { name: 'Add Review Here!' }).fill(message)
 
-    
+    }
+
 }
