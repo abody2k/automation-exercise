@@ -265,8 +265,16 @@ export class Products {
     }
 
 
-    async submitReview(){
+    async submitReview() {
 
         await this.page.getByRole('button', { name: 'Submit' }).click()
+    }
+
+    /**
+     * this is to be used after submitting a review
+     * it appears for a few seconds only
+     */
+    getSuccessMessage() {
+        return this.page.locator('.alert-success').filter({hasText:"Thank you for"})
     }
 }
