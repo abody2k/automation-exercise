@@ -102,7 +102,9 @@ test.describe("All account UI related test.skips", () => {
 
     await products.addProductToCartByName(productsNames[0])
     await products.viewCartAfterAddingItem();
-        
+    await products.clickOnProceedToCheckout();
+    
+    await expect(page).toHaveURL("www.nothing.com",{timeout:400000})
 
   })
 

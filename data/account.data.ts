@@ -29,6 +29,11 @@ export const data = {
     birth_month: "7",
     birth_year: "2000",
 
+    . dfdg dfgdfg
+fdgfg
+sdsd ddd 234324
+India
+23432234
 
     invalidBirth_date: "99",
     invalidBirth_month: "88",
