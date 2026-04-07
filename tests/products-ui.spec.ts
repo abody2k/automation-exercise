@@ -1,5 +1,5 @@
 import { data } from "../data/account.data";
-import { brands, itemsToBuy, search } from "../data/products.data";
+import { brands, itemsToBuy, productsNames, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { goToProductsThroughHome } from "../utils/account.util";
 import { goHome } from "../utils/home.util";
@@ -164,5 +164,13 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
+
+    test("Checking if viewing a product and adding a review works",async({products})=>{
+
+
+
+        await products.viewProduct(productsNames[0]);
+        
+    })
 
 })
