@@ -8,16 +8,20 @@ export class Checkout{
         this.addressDelivery = page.locator("#address_delivery")
     }
 
-    getFirstNameInDeliveryAddress(){
+    /**
+     * it is going to be separated by space as in firstname lastname
+     * @returns locator of the corresponding field
+     */
+    getFirstNameLastNameInDeliveryAddress(){
 
 
         return this.addressDelivery.locator(".address_firstname")
     }
-    getastNameInDeliveryAddress(){
+
+    getCityStatePostcodeInDeliveryAddress(){
 
 
-        return this.addressDelivery.locator(".address_lastname")
+        return this.addressDelivery.locator(".address_city")
     }
-
 
 }
