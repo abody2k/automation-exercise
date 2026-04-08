@@ -97,7 +97,7 @@ export class Checkout {
      * @param month 2 digits as in 12
      */
     async fillMonth(month: string) {
-        await this.page.getByRole('textbox', { name: 'ex.' }).fill(month)
+        await this.page.getByRole('textbox', { name: 'MM' }).fill(month)
     }
 
 

@@ -95,7 +95,7 @@ test.describe("e2e tests", () => {
 
         await test.step("Adding a comment then placing the order", async () => {
 
-            await fillPaymentInformation({ checkout, cardNumber: "card", cvc: "123", nameOnCard: "haha", month: "12", year: "2030" })
+            await fillPaymentInformation({ checkout, cardNumber: "sddscdc", cvc: "123", nameOnCard: "haha", month: "12", year: "2030" })
             await checkout.clickOnPayAndConfirmOrder()
             await expect(checkout.orderPlacedSuccessfullyMsg).toBeVisible()
         })
