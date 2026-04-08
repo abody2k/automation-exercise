@@ -62,4 +62,10 @@ export class Checkout {
         this.addressDelivery = type == "biling" ? this.page.locator("#address_invoice") : this.page.locator("#address_delivery")
 
     }
+
+
+    async leaveComment(comment: string) {
+
+        await this.page.locator('textarea[name="message"]').fill(comment);
+    }
 }
