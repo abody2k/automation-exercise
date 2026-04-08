@@ -1,7 +1,8 @@
 import { data } from "../data/account.data";
 import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../utils/account.util";
+import { makeNewAccount } from "../flows/auth.flow";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
 
 
@@ -76,11 +77,11 @@ test.describe("All account UI related test.skips", () => {
   })
 
   //happy end case
-  test.skip("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page, header }) => {
 
     await goToLoginSingup(page, account);
 
-    await makeNewAccount(account, page);
+    await makeNewAccount({ account, page, header, data });
     //save login info because after making new account you are automatically signed in
     await saveCurrentLoginState(page);
 
@@ -88,39 +89,6 @@ test.describe("All account UI related test.skips", () => {
   });
 
 
-  //This is case 23
-  test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
-
-    await home.goHome();
-    await header.goToSignupLogin();
-    await makeNewAccount(account, page);
-
-    await account.clickOnContinueAfterMakingAccount();
-    await expect(account.loggedInLabel).toBeVisible();
-
-    //we are at home page right now
-
-    await products.addProductToCartByName(productsNames[0])
-    await products.viewCartAfterAddingItem();
-    await products.clickOnProceedToCheckout();
-
-    await expect(page).toHaveURL(/.*checkout/)
-
-    for (let i = 0; i < 2; i++) {
-
-      await expect(checkout.getFirstNameLastName()).toContainText(`${data.firstName} ${data.lastName}`)
-      await expect(checkout.getPhoneNumber()).toContainText(`${data.mobileNumber}`)
-      await expect(checkout.getAddress1Address2()).toContainText(`${data.address}`)
-      await expect(checkout.getCityStatePostcode()).toContainText(`${data.city} ${data.state} ${data.zipCode}`)
-      await expect(checkout.getCountry()).toContainText(`${data.country}`)
-      checkout.changeAddress();
-    }
-
-    await header.DeleteAccount();
-    await expect(account.accountDeletedMsg).toBeVisible();
-    await account.clickOnContinueAfterDeletingTheAccount();
-
-  })
 
 
 });

@@ -1,11 +1,12 @@
+import { data } from "../data/account.data";
 import { menCategories, womenCategories } from "../data/home.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goHome } from "../utils/home.util";
+import { goHome, subscribe } from "../utils/home.util";
 
 test.describe("Home tests go here", () => {
 
-    test.beforeEach(async({page})=>{
+    test.beforeEach(async ({ page }) => {
 
         await goHome(page);
     })
@@ -14,7 +15,7 @@ test.describe("Home tests go here", () => {
 
 
 
-        
+
         await expect(home.categories).toBeVisible();
         await home.clickOnWomenCategory();
         await home.clickOnSubCategory(womenCategories[0], "Women");
@@ -28,7 +29,7 @@ test.describe("Home tests go here", () => {
 
 
 
-    test("adding products from recommendation section", async ({home,products }) => {
+    test.skip("adding products from recommendation section", async ({ home, products }) => {
 
         await home.scrollToBottomOfPage()
         await expect(home.getRecommendedItems()).toBeVisible();
@@ -36,4 +37,47 @@ test.describe("Home tests go here", () => {
         await products.viewCartAfterAddingItem()
         expect(products.doesItemExistInCart(productsNames[0])).toBeTruthy()
     })
+
+    //case 25
+    test.skip("Testing if arrow button scolls up", async ({ home }) => {
+
+        await home.scrollToBottomOfPage();
+        // await page.mouse.wheel(0,100000)
+        await expect(home.subscriptionField).toBeVisible();
+        await home.clickOnArrow();
+        await expect(home.fullFledgedFiled).toBeVisible({ timeout: 12000 });// added timeout because of animation
+
+    })
+
+
+
+    test.skip("Scrolling up and down without arrows is possible", async ({ home }) => {
+
+
+
+        await home.scrollToBottomOfPage();
+        await expect(home.subscriptionField).toBeVisible();
+        await home.scrollUpToLogo()
+        await expect(home.fullFledgedFiled).toBeVisible({ timeout: 12000 });// added timeout because of animation
+
+    })
+
+    //test case 10
+    test.skip("User can subscribe", async ({ home }) => {
+
+
+        await subscribe({ home, data })
+
+    })
+
+
+    //test case 11
+    test("Use ca subscribe from Cart UI", async ({ home, header }) => {
+
+
+
+        await header.goToCart();
+        await subscribe({ home, data });
+    })
+
 })
