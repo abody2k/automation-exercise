@@ -6,11 +6,13 @@ export class Home {
 
     categories: Locator
     subscriptionField: Locator
+    fullFledgedFiled:Locator
     constructor(private page: Page) {
 
 
         this.categories = this.page.locator(".category-products")
         this.subscriptionField = this.page.locator("h2").getByText("Subscription")
+        this.fullFledgedFiled = this.page.getByText("Full-Fledged practice website for Automation Engineers").first()
     }
 
     async goHome() {

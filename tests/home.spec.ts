@@ -37,9 +37,14 @@ test.describe("Home tests go here", () => {
         expect(products.doesItemExistInCart(productsNames[0])).toBeTruthy()
     })
 
+    //case 25
+    test.skip("Testing if arrow button scolls up",async ({home})=>{
 
-    test("Testing if arrow button scolls up",({})=>{
+        await home.scrollToBottomOfPage();
+        // await page.mouse.wheel(0,100000)
+        await expect(home.subscriptionField).toBeVisible();
+        await home.clickOnArrow();
+        await expect(home.fullFledgedFiled).toBeVisible({timeout:12000});// added timeout because of animation
 
-        // await home
     })
 })
