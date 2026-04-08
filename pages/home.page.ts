@@ -6,7 +6,7 @@ export class Home {
 
     categories: Locator
     subscriptionField: Locator
-    fullFledgedFiled:Locator
+    fullFledgedFiled: Locator
     constructor(private page: Page) {
 
 
@@ -59,9 +59,15 @@ export class Home {
     /**
      * the arrow button that takes the user to the top
      */
-    async clickOnArrow(){
+    async clickOnArrow() {
 
         await this.page.locator("#scrollUp").click();
     }
 
+
+    async scrollUpToLogo() {
+
+
+        this.page.locator("#Logo").first().scrollIntoViewIfNeeded();
+    }
 }
