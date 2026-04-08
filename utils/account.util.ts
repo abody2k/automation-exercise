@@ -4,7 +4,6 @@ import { Account } from "../pages/account.page";
 import path from "path";
 import { goHome } from "./home.util";
 import { Header } from "../components/header.component";
-import { data } from "../data/account.data";
 
 
 
@@ -63,7 +62,7 @@ export async function loadLoginState(page: Page) {
 
 
 
-export async function makeNewAccount(account: Account, page: Page) {
+export async function makeNewAccount({ account, page, data }: { account: Account, page: Page, data: { signupEmail: string, signupUsername: string, firstName: string, lastName: string, signupPassword: string, address: string, city: string, country: string, state: string, zipCode: string, mobileNumber: string, birth_date: string, birth_month: string, birth_year: string } }) {
     await account.enterSignupEmail(data.signupEmail);
     await account.enterSignupUsername(data.signupUsername);
     await account.clickOnSignup(); //clicking here navigates the user to a new page

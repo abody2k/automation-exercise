@@ -93,7 +93,7 @@ test.describe("All account UI related test.skips", () => {
 
     await home.goHome();
     await header.goToSignupLogin();
-    await makeNewAccount(account, page);
+    await makeNewAccount({ account, page, data });
 
     await account.clickOnContinueAfterMakingAccount();
     await expect(account.loggedInLabel).toBeVisible();
