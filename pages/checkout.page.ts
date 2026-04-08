@@ -69,12 +69,16 @@ export class Checkout {
         await this.page.locator('textarea[name="message"]').fill(comment);
     }
 
-    async clickOnPlaceOrder(){
+    async clickOnPlaceOrder() {
         await this.page.getByRole('link', { name: 'Place Order' }).click()
     }
 
 
-    async fillNameOnCard(name:string){
+    async fillNameOnCard(name: string) {
         await this.page.locator('input[name="name_on_card"]').fill(name)
     }
+    async fillCardNumber(name: number) {
+        await this.page.locator('input[name="card_number"]').fill(name.toString())
+    }
+
 }
