@@ -1,7 +1,8 @@
 import { data } from "../data/account.data";
 import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../utils/account.util";
+import { makeNewAccount } from "../flows/auth.flow";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
 
 
@@ -76,11 +77,11 @@ test.describe("All account UI related test.skips", () => {
   })
 
   //happy end case
-  test.skip("signup using correct genuine data", async ({ account, page }) => {
+  test.skip("signup using correct genuine data", async ({ account, page, header }) => {
 
     await goToLoginSingup(page, account);
 
-    await makeNewAccount(account, page);
+    await makeNewAccount({ account, page, header, data });
     //save login info because after making new account you are automatically signed in
     await saveCurrentLoginState(page);
 
@@ -88,6 +89,6 @@ test.describe("All account UI related test.skips", () => {
   });
 
 
- 
+
 
 });
