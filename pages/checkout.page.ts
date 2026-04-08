@@ -74,5 +74,7 @@ export class Checkout {
     }
 
 
-    
+    async fillNameOnCard(name:string){
+        await this.page.locator('input[name="name_on_card"]').fill(name)
+    }
 }
