@@ -2,7 +2,7 @@ import { data } from "../data/account.data";
 import { menCategories, womenCategories } from "../data/home.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goHome } from "../utils/home.util";
+import { goHome, subscribe } from "../utils/home.util";
 
 test.describe("Home tests go here", () => {
 
@@ -59,16 +59,14 @@ test.describe("Home tests go here", () => {
         await expect(home.subscriptionField).toBeVisible();
         await home.scrollUpToLogo()
         await expect(home.fullFledgedFiled).toBeVisible({ timeout: 12000 });// added timeout because of animation
-        
+
     })
 
+    //test case 10
+    test("User can subscribe", async ({ home }) => {
 
-    test("User can subscribe",async({home})=>{
 
-
-        await home.EnterEmailForSubscription(data.loginEmail)
-        await home.subscribe();
-        await expect (home.subscriptionSuccessMsg).toBeVisible();
+        await subscribe({ home, data })
 
     })
 })
