@@ -68,6 +68,6 @@ export class Home {
     async scrollUpToLogo() {
 
 
-        await this.page.locator("#Logo").first().scrollIntoViewIfNeeded();
+        await this.subscriptionField.hover();
     }
 }
