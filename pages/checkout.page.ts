@@ -121,4 +121,11 @@ export class Checkout {
 
     }
 
+
+
+    async clickOnContinueAfterPaying() {
+
+        await this.page.getByRole('link', { name: 'Continue' }).click();
+    }
+
 }
