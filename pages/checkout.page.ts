@@ -77,8 +77,15 @@ export class Checkout {
     async fillNameOnCard(name: string) {
         await this.page.locator('input[name="name_on_card"]').fill(name)
     }
-    async fillCardNumber(name: number) {
+
+
+    async fillCardNumber(name: string) {
         await this.page.locator('input[name="card_number"]').fill(name.toString())
     }
+
+    async fillCvc(name: string) {
+        await this.page.getByRole('textbox', { name: 'ex.' }).fill(name.toString())
+    }
+    
 
 }
