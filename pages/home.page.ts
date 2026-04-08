@@ -68,6 +68,6 @@ export class Home {
     async scrollUpToLogo() {
 
 
-        this.page.locator("#Logo").first().scrollIntoViewIfNeeded();
+        await this.page.locator("#Logo").first().scrollIntoViewIfNeeded();
     }
 }
