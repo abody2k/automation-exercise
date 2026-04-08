@@ -68,4 +68,11 @@ export class Checkout {
 
         await this.page.locator('textarea[name="message"]').fill(comment);
     }
+
+    async clickOnPlaceOrder(){
+        await this.page.getByRole('link', { name: 'Place Order' }).click()
+    }
+
+
+    
 }
