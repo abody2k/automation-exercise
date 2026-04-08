@@ -4,9 +4,12 @@ export class Checkout {
 
 
     addressDelivery: Locator
+    orderPlacedSuccessfullyMsg: Locator 
+
     constructor(private page: Page) {
 
         this.addressDelivery = page.locator("#address_delivery")
+        this.orderPlacedSuccessfullyMsg = page.getByText("Your order has been placed successfully").first()
     }
 
     /**
@@ -87,6 +90,8 @@ export class Checkout {
         await this.page.getByRole('textbox', { name: 'ex.' }).fill(cvc)
     }
 
+
+
     /**
      * 
      * @param month 2 digits as in 12
@@ -94,6 +99,8 @@ export class Checkout {
     async fillMonth(month: string) {
         await this.page.getByRole('textbox', { name: 'ex.' }).fill(month)
     }
+
+
 
 
     /**
@@ -108,11 +115,15 @@ export class Checkout {
 
 
 
+
+
     async clickOnPayAndConfirmOrder() {
 
 
         await this.page.getByRole('button', { name: 'Pay and Confirm Order' }).click();
     }
+
+
 
 
     async clickOnDownloadInvoice() {
