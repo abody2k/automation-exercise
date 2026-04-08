@@ -70,4 +70,9 @@ export class Home {
 
         await this.subscriptionField.hover();
     }
+
+    async EnterEmailForSubscription(email: string) {
+
+        await this.page.getByRole('textbox', { name: 'Your email address' }).fill(email)
+    }
 }
