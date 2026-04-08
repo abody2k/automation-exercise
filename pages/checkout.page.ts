@@ -86,8 +86,22 @@ export class Checkout {
     async fillCvc(cvc: string) {
         await this.page.getByRole('textbox', { name: 'ex.' }).fill(cvc)
     }
-    
+
+    /**
+     * 
+     * @param month 2 digits as in 12
+     */
     async fillMonth(month: string) {
         await this.page.getByRole('textbox', { name: 'ex.' }).fill(month)
+    }
+
+
+    /**
+     * 
+     * @param year 4 digits as in 2030
+     */
+    async fillYear(year: string) {
+
+        await this.page.getByRole('textbox', { name: 'YYYY' }).fill(year)
     }
 }
