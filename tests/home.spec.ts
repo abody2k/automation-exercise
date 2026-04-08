@@ -63,10 +63,21 @@ test.describe("Home tests go here", () => {
     })
 
     //test case 10
-    test("User can subscribe", async ({ home }) => {
+    test.skip("User can subscribe", async ({ home }) => {
 
 
         await subscribe({ home, data })
 
     })
+
+
+    //test case 11
+    test("Use ca subscribe from Cart UI", async ({ home, header }) => {
+
+
+
+        await header.goToCart();
+        await subscribe({ home, data });
+    })
+
 })
