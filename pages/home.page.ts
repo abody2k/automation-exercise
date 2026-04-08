@@ -52,4 +52,13 @@ export class Home {
         return this.page.getByRole('heading', { name: 'recommended items' })
     }
 
+
+    /**
+     * the arrow button that takes the user to the top
+     */
+    async clickOnArrow(){
+
+        await this.page.locator("#scrollUp").click();
+    }
+
 }
