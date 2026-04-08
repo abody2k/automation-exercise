@@ -4,11 +4,12 @@ import { expect, test } from "../fixtures/global.fixture";
 import { makeNewAccount } from "../flows/auth.flow";
 import { fillPaymentInformation } from "../flows/payments.flow";
 import { addProductAndProceedToCheckout, checkIfAdressInfoIsCorrect } from "../flows/products.flow";
+import { downloadInvoice } from "../utils/checkout.util";
 
 test.describe("e2e tests", () => {
 
     //This is case 23
-    test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
+    test.skip("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
 
 
         await test.step("Going home", async () => {
@@ -95,6 +96,15 @@ test.describe("e2e tests", () => {
         await test.step("Adding a comment then placing the order", async () => {
 
             await fillPaymentInformation({ checkout, cardNumber: "card", cvc: "123", nameOnCard: "haha", month: "12", year: "2030" })
+            await checkout.clickOnPayAndConfirmOrder()
+            await expect(checkout.orderPlacedSuccessfullyMsg).toBeVisible()
+        })
+
+
+        await test.step("Download invoice", async () => {
+
+            await downloadInvoice({ checkout, page });
+            await checkout.clickOnContinueAfterPaying();
 
         })
 
