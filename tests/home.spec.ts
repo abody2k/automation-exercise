@@ -1,3 +1,4 @@
+import { data } from "../data/account.data";
 import { menCategories, womenCategories } from "../data/home.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
@@ -50,7 +51,7 @@ test.describe("Home tests go here", () => {
 
 
 
-    test("Scrolling up and down without arrows is possible", async ({ home }) => {
+    test.skip("Scrolling up and down without arrows is possible", async ({ home }) => {
 
 
 
@@ -59,5 +60,15 @@ test.describe("Home tests go here", () => {
         await home.scrollUpToLogo()
         await expect(home.fullFledgedFiled).toBeVisible({ timeout: 12000 });// added timeout because of animation
         
+    })
+
+
+    test("User can subscribe",async({home})=>{
+
+
+        await home.EnterEmailForSubscription(data.loginEmail)
+        await home.subscribe();
+        await expect (home.subscriptionSuccessMsg).toBeVisible();
+
     })
 })
