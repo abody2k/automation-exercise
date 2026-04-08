@@ -7,12 +7,17 @@ export class Home {
     categories: Locator
     subscriptionField: Locator
     fullFledgedFiled: Locator
+    subscriptionSuccessMsg: Locator
+
+
     constructor(private page: Page) {
 
 
         this.categories = this.page.locator(".category-products")
         this.subscriptionField = this.page.locator("h2").getByText("Subscription")
         this.fullFledgedFiled = this.page.getByText("Full-Fledged practice website for Automation Engineers").first()
+    
+        this.subscriptionSuccessMsg = this.page.getByText("You have been successfully subscribed!")
     }
 
     async goHome() {
@@ -74,5 +79,12 @@ export class Home {
     async EnterEmailForSubscription(email: string) {
 
         await this.page.getByRole('textbox', { name: 'Your email address' }).fill(email)
+    }
+
+    /**
+     * subscribe to the subscription using email
+     */
+    async subscribe() {
+        await this.page.locator('#subscribe').click();
     }
 }
