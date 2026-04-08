@@ -2,6 +2,7 @@ import { data } from "../data/account.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { makeNewAccount } from "../flows/auth.flow";
+import { fillPaymentInformation } from "../flows/payments.flow";
 import { addProductAndProceedToCheckout, checkIfAdressInfoIsCorrect } from "../flows/products.flow";
 
 test.describe("e2e tests", () => {
@@ -82,13 +83,20 @@ test.describe("e2e tests", () => {
 
         })
 
-        await test.step("Adding a comment then placing the order",async()=>{
+        await test.step("Adding a comment then placing the order", async () => {
 
             await checkout.leaveComment("RANDOM COMMENT")
             await checkout.clickOnPlaceOrder();
 
         })
 
+
+
+        await test.step("Adding a comment then placing the order", async () => {
+
+            await fillPaymentInformation({ checkout, cardNumber: "card", cvc: "123", nameOnCard: "haha", month: "12", year: "2030" })
+
+        })
 
 
         await test.step("Deleteing account", async () => {
