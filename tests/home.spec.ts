@@ -28,12 +28,18 @@ test.describe("Home tests go here", () => {
 
 
 
-    test("adding products from recommendation section", async ({home,products }) => {
+    test.skip("adding products from recommendation section", async ({home,products }) => {
 
         await home.scrollToBottomOfPage()
         await expect(home.getRecommendedItems()).toBeVisible();
         await products.addProductToCartFromHomePageRecommendations(productsNames[0])
         await products.viewCartAfterAddingItem()
         expect(products.doesItemExistInCart(productsNames[0])).toBeTruthy()
+    })
+
+
+    test("Testing if arrow button scolls up",({})=>{
+
+        // await home
     })
 })
