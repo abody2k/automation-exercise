@@ -104,4 +104,14 @@ export class Checkout {
 
         await this.page.getByRole('textbox', { name: 'YYYY' }).fill(year)
     }
+
+
+
+
+    async clickOnPayAndConfirmOrder() {
+
+
+        await this.page.getByRole('button', { name: 'Pay and Confirm Order' }).click();
+    }
+
 }
