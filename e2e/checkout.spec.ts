@@ -52,7 +52,7 @@ test.describe("e2e tests", () => {
 
 
 
-    //This is case 26
+    //This is case 24
     test("Making a payment and downloading the invoice after making an account", async ({ home, header, account, page, products, checkout }) => {
 
 
