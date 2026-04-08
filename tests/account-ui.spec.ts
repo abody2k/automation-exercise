@@ -106,16 +106,15 @@ test.describe("All account UI related test.skips", () => {
 
     await expect(page).toHaveURL(/.*checkout/)
 
-    for (let i = 0; i < 2; i++) {
+    let addressType: ["biling", "delivery"] = ["biling", "delivery"]
+    for (const address of addressType) {
 
-      await expect(checkout.getFirstNameLastName()).toContainText(`${data.firstName} ${data.lastName}`)
-      await expect(checkout.getPhoneNumber()).toContainText(`${data.mobileNumber}`)
-      await expect(checkout.getAddress1Address2()).toContainText(`${data.address}`)
-      await expect(checkout.getCityStatePostcode()).toContainText(`${data.city} ${data.state} ${data.zipCode}`)
-      await expect(checkout.getCountry()).toContainText(`${data.country}`)
-      checkout.changeAddress();
+      await expect(checkout.getFirstNameLastName(address)).toContainText(`${data.firstName} ${data.lastName}`)
+      await expect(checkout.getPhoneNumber(address)).toContainText(`${data.mobileNumber}`)
+      await expect(checkout.getAddress1Address2(address)).toContainText(`${data.address}`)
+      await expect(checkout.getCityStatePostcode(address)).toContainText(`${data.city} ${data.state} ${data.zipCode}`)
+      await expect(checkout.getCountry(address)).toContainText(`${data.country}`)
     }
-
     await header.DeleteAccount();
     await expect(account.accountDeletedMsg).toBeVisible();
     await account.clickOnContinueAfterDeletingTheAccount();

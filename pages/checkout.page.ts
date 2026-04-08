@@ -2,7 +2,6 @@ import { Locator, Page } from "@playwright/test";
 
 export class Checkout {
 
-    private currentAdress = 0
 
     addressDelivery: Locator
     constructor(private page: Page) {
@@ -14,40 +13,40 @@ export class Checkout {
      * it is going to be separated by space as in firstname lastname
      * @returns locator of the corresponding field
      */
-    getFirstNameLastName() {
+    getFirstNameLastName(type: "biling" | "delivery") {
 
 
-        return this.getLocatorUsingAddressDelivery(".address_firstname")
+        return this.getLocatorUsingAddressDelivery(".address_firstname", type)
     }
 
-    getCityStatePostcode() {
+    getCityStatePostcode(type: "biling" | "delivery") {
 
 
-        return this.getLocatorUsingAddressDelivery(".address_city")
-    }
-
-
-    getCountry() {
-
-
-        return this.getLocatorUsingAddressDelivery(".address_country_name")
-    }
-
-    getPhoneNumber() {
-
-
-        return this.getLocatorUsingAddressDelivery(".address_phone")
+        return this.getLocatorUsingAddressDelivery(".address_city", type)
     }
 
 
-    getAddress1Address2() {
+    getCountry(type: "biling" | "delivery") {
 
 
-        return this.getLocatorUsingAddressDelivery(".address_address1").nth(1) // for some reason, the dev decided to duplicate the field 3 times so the right one is the second field hence the nth(1)
+        return this.getLocatorUsingAddressDelivery(".address_country_name", type)
     }
 
-    getLocatorUsingAddressDelivery(locator_class: string) {
+    getPhoneNumber(type: "biling" | "delivery") {
 
+
+        return this.getLocatorUsingAddressDelivery(".address_phone", type)
+    }
+
+
+    getAddress1Address2(type: "biling" | "delivery") {
+
+
+        return this.getLocatorUsingAddressDelivery(".address_address1", type).nth(1) // for some reason, the dev decided to duplicate the field 3 times so the right one is the second field hence the nth(1)
+    }
+
+    getLocatorUsingAddressDelivery(locator_class: string, type: "biling" | "delivery") {
+        this.changeAddress(type)
         return this.addressDelivery.locator(locator_class)
     }
 
@@ -58,10 +57,9 @@ export class Checkout {
      * use it when you want to get the locator of the address info in
      * the other container
      */
-    changeAddress() {
+    changeAddress(type: "biling" | "delivery") {
 
-        this.addressDelivery = this.currentAdress == 0 ? this.page.locator("#address_invoice") : this.page.locator("#address_delivery")
-        this.currentAdress += 1;
-        this.currentAdress = this.currentAdress % 2;
+        this.addressDelivery = type == "biling" ? this.page.locator("#address_invoice") : this.page.locator("#address_delivery")
+
     }
 }
