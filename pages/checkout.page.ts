@@ -114,4 +114,11 @@ export class Checkout {
         await this.page.getByRole('button', { name: 'Pay and Confirm Order' }).click();
     }
 
+
+    async clickOnDownloadInvoice() {
+
+        await this.page.getByRole('link', { name: 'Download Invoice' }).click();
+
+    }
+
 }
