@@ -7,11 +7,11 @@
  */
 export const data = {
 
-    loginEmail: "sometdddhidngggggnew2222222@somewhere.com",// these info here are vaild
+    loginEmail: "sometdddhidngggggnewffw2222222@somewhere.com",// these info here are vaild
     loginPassword: "hahahaha",// these info here are vaild,
     incorrectLoginEmail: "12@s",
     incorrectLoginPassword: "12@s",
-    signupEmail: "sometdddhidngggggnewffw2222222@somewhere.com",
+    signupEmail: "sometdddhidngggggnewffw222222cxx2222@somewhere.com",
     signupPassword: "hahahaha",
     signupUsername: "someone",
 

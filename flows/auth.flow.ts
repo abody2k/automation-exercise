@@ -72,7 +72,7 @@ export async function isLoginWarningVisible(account: Account) {
 
 
 export async function saveCurrentLoginState(page: Page) {
-    page.context().storageState({ path: path.resolve(__dirname, "../data/login.data.json") })
+    await page.context().storageState({ path: path.resolve(__dirname, "../data/login.data.json") })
 }
 
 

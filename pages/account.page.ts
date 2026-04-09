@@ -211,7 +211,7 @@ export class Account {
 
     async clickOnContinueAfterMakingAccount() {
 
-        this.page.getByText("Continue").first().click();
+        await this.page.getByText("Continue").first().click();
     }
 
 
