@@ -37,3 +37,12 @@ export async function goToProductsThroughHome({ page, header }: { page: Page, he
     await header.goToProducts();
     await expect(page).toHaveURL(/.*products/)
 }
+
+
+export async function addProductByNameAndWaitForAffirmationUI(products: Products, productName: string) {
+
+    await products.addProductToCartByName(productName);
+    await expect(products.continueShopping).toBeVisible();
+
+
+}

@@ -1,9 +1,8 @@
 import { data } from "../data/account.data";
 import { brands, itemsToBuy, productsNames, reviewData, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goToProductsThroughHome } from "../flows/products.flow";
-import { goHome } from "../utils/home.util";
-import { addProductAndWaitForAffirmationUI, addProductByNameAndWaitForAffirmationUI } from "../utils/products.util";
+import { addProductByNameAndWaitForAffirmationUI, goToProductsThroughHome } from "../flows/products.flow";
+import { addProductAndWaitForAffirmationUI } from "../utils/products.util";
 
 test.describe("All products UI test.skips goes here", () => {
 

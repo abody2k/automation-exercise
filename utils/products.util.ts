@@ -9,10 +9,3 @@ export async function addProductAndWaitForAffirmationUI(products: Products, prod
 
 }
 
-export async function addProductByNameAndWaitForAffirmationUI(products: Products, productName: string) {
-
-    await products.addProductToCartByName(productName);
-    await expect(products.continueShopping).toBeVisible();
-
-
-}
