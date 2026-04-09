@@ -7,20 +7,7 @@ import { Header } from "../components/header.component";
 
 
 
-/**
- * a helper function that goes to login page and uses email and password to login
- * @param account the account object that you got from test
- * @param email 
- * @param password 
- */
-export async function login(account: Account, email: string, password: string) {
 
-
-    await account.enterEmailForLogin(email)
-    await account.enterPasswordForLogin(password);
-    await account.login();
-
-}
 
 
 export async function goToLoginSingup(page: Page, account: Account) {
