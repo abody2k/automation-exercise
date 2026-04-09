@@ -16,9 +16,7 @@ import path from "path";
 
 
 
-export async function saveCurrentLoginState(page: Page) {
-    page.context().storageState({ path: path.resolve(__dirname, "../data/login.data.json") })
-}
+
 
 export async function loadLoginState(page: Page) {
     await page.context().setStorageState(path.resolve(__dirname, "../data/login.data.json"))
