@@ -1,6 +1,9 @@
+import { Page } from "@playwright/test";
 import { expect } from "../fixtures/global.fixture";
 import { Checkout } from "../pages/checkout.page";
 import { Products } from "../pages/products.page";
+import { goHome } from "../utils/home.util";
+import { Header } from "../components/header.component";
 
 export async function addProductAndProceedToCheckout({ productName, products }: { productName: string, products: Products }) {
 
@@ -23,4 +26,14 @@ export async function checkIfAdressInfoIsCorrect({ checkout, data }: { checkout:
         await expect(checkout.getCountry(address)).toContainText(`${data.country}`)
     }
 
+}
+
+
+
+export async function goToProductsThroughHome({ page, header }: { page: Page, header: Header }) {
+
+
+    await goHome(page);
+    await header.goToProducts();
+    await expect(page).toHaveURL(/.*products/)
 }

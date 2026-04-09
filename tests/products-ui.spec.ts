@@ -1,7 +1,7 @@
 import { data } from "../data/account.data";
 import { brands, itemsToBuy, productsNames, reviewData, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goToProductsThroughHome } from "../utils/account.util";
+import { goToProductsThroughHome } from "../flows/products.flow";
 import { goHome } from "../utils/home.util";
 import { addProductAndWaitForAffirmationUI, addProductByNameAndWaitForAffirmationUI } from "../utils/products.util";
 

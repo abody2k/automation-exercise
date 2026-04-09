@@ -13,13 +13,7 @@ import { Header } from "../components/header.component";
 
 
 
-export async function goToProductsThroughHome({ page, header }: { page: Page, header: Header }) {
 
-
-    await goHome(page);
-    await header.goToProducts();
-    await expect(page).toHaveURL(/.*products/)
-}
 
 
 /**
