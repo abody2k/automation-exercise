@@ -1,8 +1,8 @@
 import { data } from "../data/account.data";
 import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { makeNewAccount } from "../flows/auth.flow";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
+import { login, makeNewAccount } from "../flows/auth.flow";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, saveCurrentLoginState } from "../utils/account.util";
 import { randomInt } from "crypto";
 
 
