@@ -106,7 +106,7 @@ test.describe("All products UI tests goes here", () => {
 
     })
 
-
+    //test case 19 
     test("Check if brands browsing works well", async ({ products, page }) => {
 
 
