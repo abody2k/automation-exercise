@@ -4,7 +4,7 @@ import { newRequest } from "../utils/apis.util";
 
 
 
-export async function registerAccount(obj: { name?: string, email?: string, password?: string, city?: string, state?: string, firstName?: string, lastName?: string, zipcode?: string, address1?: string, mobileNumber?: string, birth_date?: string, birth_month?: string, birth_year?: string, country?: string, title?: string, company?: string, address2?: string }) {
+export async function registerAccount(obj: { name?: string, email?: string, password?: string, city?: string, state?: string, firstname?: string, lastname?: string, zipcode?: string, address1?: string, mobile_number?: string, birth_date?: string, birth_month?: string, birth_year?: string, country?: string, title?: string, company?: string, address2?: string }) {
 
 
     let context = await newRequest();
