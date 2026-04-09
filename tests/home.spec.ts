@@ -2,8 +2,7 @@ import { data } from "../data/account.data";
 import { menCategories, womenCategories } from "../data/home.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goHome } from "../flows/home.flow";
-import {  subscribe } from "../utils/home.util";
+import { goHome, subscribe } from "../flows/home.flow";
 
 test.describe("Home tests go here", () => {
 
