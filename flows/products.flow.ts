@@ -46,3 +46,12 @@ export async function addProductByNameAndWaitForAffirmationUI(products: Products
 
 
 }
+
+
+export async function addProductAndWaitForAffirmationUI(products: Products, productIndex: number) {
+
+    await products.addProductToCart(productIndex);
+    await expect(products.continueShopping).toBeVisible();
+
+
+}
