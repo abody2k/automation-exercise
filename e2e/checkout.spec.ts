@@ -9,7 +9,7 @@ import { addProductAndProceedToCheckout, checkIfAdressInfoIsCorrect } from "../f
 test.describe("e2e tests", () => {
 
     //This is case 23
-    test.skip("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
+    test("Verify address details in checkout page after making an account", async ({ home, header, account, page, products, checkout }) => {
 
 
         await test.step("Going home", async () => {
@@ -53,7 +53,7 @@ test.describe("e2e tests", () => {
 
 
     //This is case 24
-    test.skip("Making a payment and downloading the invoice after making an account", async ({ home, header, account, page, products, checkout }) => {
+    test("Making a payment and downloading the invoice after making an account", async ({ home, header, account, page, products, checkout }) => {
 
 
         await test.step("Going home", async () => {
@@ -125,7 +125,7 @@ test.describe("e2e tests", () => {
 
 
     //This is case 16
-    test.skip("Place order: login before checkout", async ({ home, header, account, page, products, checkout }) => {
+    test("Place order: login before checkout", async ({ home, header, account, page, products, checkout }) => {
 
 
         await test.step("Going home", async () => {
@@ -201,7 +201,7 @@ test.describe("e2e tests", () => {
 
 
     //This is case 14
-    test.skip("Place order: register while checkout", async ({ home, header, account, page, products, checkout }) => {
+    test("Place order: register while checkout", async ({ home, header, account, page, products, checkout }) => {
 
 
         await test.step("Going home", async () => {
