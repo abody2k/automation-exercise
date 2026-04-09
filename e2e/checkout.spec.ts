@@ -26,14 +26,14 @@ test.describe("e2e tests", () => {
         })
         await test.step("Adding product and proceeding to checkout", async () => {
 
-            addProductAndProceedToCheckout({ productName: productsNames[0], products })
+            await addProductAndProceedToCheckout({ productName: productsNames[0], products })
         })
 
 
 
         await test.step("Checking address info in checkout page", async () => {
             await expect(page).toHaveURL(/.*checkout/)
-            checkIfAdressInfoIsCorrect({ checkout, data })
+            await checkIfAdressInfoIsCorrect({ checkout, data })
 
         })
 
@@ -72,7 +72,7 @@ test.describe("e2e tests", () => {
 
             //we are at home page right now
 
-            addProductAndProceedToCheckout({ productName: productsNames[0], products })
+           await addProductAndProceedToCheckout({ productName: productsNames[0], products })
 
         })
 
@@ -80,7 +80,7 @@ test.describe("e2e tests", () => {
 
         await test.step("Checking address info in checkout page", async () => {
             await expect(page).toHaveURL(/.*checkout/)
-            checkIfAdressInfoIsCorrect({ checkout, data })
+            await checkIfAdressInfoIsCorrect({ checkout, data })
 
         })
 
