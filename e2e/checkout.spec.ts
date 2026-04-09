@@ -2,9 +2,9 @@ import { data } from "../data/account.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 import { login, makeNewAccount } from "../flows/auth.flow";
+import { downloadInvoice } from "../flows/checkout.flow";
 import { fillPaymentInformation } from "../flows/payments.flow";
 import { addProductAndProceedToCheckout, checkIfAdressInfoIsCorrect } from "../flows/products.flow";
-import { downloadInvoice } from "../utils/checkout.util";
 
 test.describe("e2e tests", () => {
 

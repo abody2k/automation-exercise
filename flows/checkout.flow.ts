@@ -1,0 +1,9 @@
+import path from "node:path"
+
+export async function downloadInvoice({checkout,page}:{checkout:Checkout,page:Page}){
+
+    const promise = page.waitForEvent("download")
+    await checkout.clickOnDownloadInvoice()
+    const download = await promise
+    await download.saveAs(path.resolve(__dirname,"../downloads/"+download.suggestedFilename()))
+}
