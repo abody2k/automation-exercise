@@ -1,5 +1,5 @@
 import { expect, test } from "../fixtures/global.fixture";
-import { goHome } from "../utils/home.util";
+import { goHome } from "../flows/home.flow";
 
 test.describe("testing test cases page", () => {
 

@@ -2,8 +2,6 @@ import { Page, TestType } from "@playwright/test";
 import { expect } from "../fixtures/global.fixture";
 import { Account } from "../pages/account.page";
 import path from "path";
-import { goHome } from "./home.util";
-import { Header } from "../components/header.component";
 
 
 

@@ -2,8 +2,8 @@ import { Page } from "@playwright/test";
 import { expect } from "../fixtures/global.fixture";
 import { Checkout } from "../pages/checkout.page";
 import { Products } from "../pages/products.page";
-import { goHome } from "../utils/home.util";
 import { Header } from "../components/header.component";
+import { goHome } from "./home.flow";
 
 export async function addProductAndProceedToCheckout({ productName, products }: { productName: string, products: Products }) {
 
