@@ -1,11 +1,10 @@
+import process from "node:process";
 import { data } from "../data/account.data";
 import { brands, itemsToBuy, productsNames, reviewData, search } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goToProductsThroughHome } from "../utils/account.util";
-import { goHome } from "../utils/home.util";
-import { addProductAndWaitForAffirmationUI, addProductByNameAndWaitForAffirmationUI } from "../utils/products.util";
+import { addProductAndWaitForAffirmationUI, addProductByNameAndWaitForAffirmationUI, goToProductsThroughHome } from "../flows/products.flow";
 
-test.describe("All products UI test.skips goes here", () => {
+test.describe("All products UI tests goes here", () => {
 
 
     test.beforeEach(async ({ page, header }) => {
@@ -15,7 +14,7 @@ test.describe("All products UI test.skips goes here", () => {
 
     })
 
-    test.skip("Verifying all products are visible and interractable", async ({ page, header, products }) => {
+    test("Verifying all products are visible and interractable", async ({ page, header, products }) => {
 
         await expect(page).toHaveURL(/.*products/);
         await expect(products.productsList).toBeVisible();
@@ -40,7 +39,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test.skip("Verifying if searching for a product actually works", async ({ products, page, header }) => {
+    test("Verifying if searching for a product actually works", async ({ products, page, header }) => {
 
         await products.searchForProduct(search) // assuming dress already exist
         await expect(products.getSearchedProductsLocator()).toBeVisible();
@@ -49,7 +48,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test.skip("Adding 2 items to the cart and verifying that the cart contains the right info", async ({ products, page, header }) => {
+    test("Adding 2 items to the cart and verifying that the cart contains the right info", async ({ products, page, header }) => {
 
 
         //the flow requires adding both the first and the second product to the cart
@@ -73,7 +72,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test.skip("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, products }) => {
+    test("Verifying quantity after adding the same item multiple times to the Cart", async ({ page, products }) => {
 
 
         for (let i = 0; i < 4; i++) {
@@ -95,7 +94,7 @@ test.describe("All products UI test.skips goes here", () => {
     })
 
 
-    test.skip("Remove Items from Cart", async ({ products }) => {
+    test("Remove Items from Cart", async ({ products }) => {
 
 
         await addProductByNameAndWaitForAffirmationUI(products, search);
@@ -107,8 +106,8 @@ test.describe("All products UI test.skips goes here", () => {
 
     })
 
-
-    test.skip("Check if brands browsing works well", async ({ products, page }) => {
+    //test case 19 
+    test("Check if brands browsing works well", async ({ products, page }) => {
 
 
 
@@ -128,7 +127,7 @@ test.describe("All products UI test.skips goes here", () => {
 
 
 
-    test.skip("Testing if items remain in cart after logging in", async ({ products, page, account, header }) => {
+    test("Testing if items remain in cart after logging in", async ({ products, page, account, header }) => {
 
 
 

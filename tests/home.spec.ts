@@ -2,7 +2,7 @@ import { data } from "../data/account.data";
 import { menCategories, womenCategories } from "../data/home.data";
 import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
-import { goHome, subscribe } from "../utils/home.util";
+import { goHome, subscribe } from "../flows/home.flow";
 
 test.describe("Home tests go here", () => {
 
@@ -11,7 +11,7 @@ test.describe("Home tests go here", () => {
         await goHome(page);
     })
 
-    test.skip("Check the visibility of the categories", async ({ page, home }) => {
+    test("Check the visibility of the categories", async ({ page, home }) => {
 
 
 
@@ -29,7 +29,7 @@ test.describe("Home tests go here", () => {
 
 
 
-    test.skip("adding products from recommendation section", async ({ home, products }) => {
+    test("adding products from recommendation section", async ({ home, products }) => {
 
         await home.scrollToBottomOfPage()
         await expect(home.getRecommendedItems()).toBeVisible();
@@ -39,7 +39,7 @@ test.describe("Home tests go here", () => {
     })
 
     //case 25
-    test.skip("Testing if arrow button scolls up", async ({ home }) => {
+    test("Testing if arrow button scolls up", async ({ home }) => {
 
         await home.scrollToBottomOfPage();
         // await page.mouse.wheel(0,100000)
@@ -51,7 +51,7 @@ test.describe("Home tests go here", () => {
 
 
 
-    test.skip("Scrolling up and down without arrows is possible", async ({ home }) => {
+    test("Scrolling up and down without arrows is possible", async ({ home }) => {
 
 
 
@@ -63,7 +63,7 @@ test.describe("Home tests go here", () => {
     })
 
     //test case 10
-    test.skip("User can subscribe", async ({ home }) => {
+    test("User can subscribe", async ({ home }) => {
 
 
         await subscribe({ home, data })

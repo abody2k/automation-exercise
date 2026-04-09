@@ -4,12 +4,12 @@ export class Checkout {
 
 
     addressDelivery: Locator
-    orderPlacedSuccessfullyMsg: Locator 
+    orderPlacedSuccessfullyMsg: Locator
 
     constructor(private page: Page) {
 
         this.addressDelivery = page.locator("#address_delivery")
-        this.orderPlacedSuccessfullyMsg = page.locator("#success_message").first()
+        this.orderPlacedSuccessfullyMsg = page.locator(".alert-success").getByText("Your order has been placed successfully!").first()
     }
 
     /**
@@ -137,6 +137,13 @@ export class Checkout {
     async clickOnContinueAfterPaying() {
 
         await this.page.getByRole('link', { name: 'Continue' }).click();
+    }
+
+    /**
+     * When you click on proceed (in cart) and you are not logged in
+     */
+    async clickOnRegister() {
+        await this.page.getByRole('link', { name: 'Register / Login' }).click();
     }
 
 }

@@ -7,11 +7,11 @@
  */
 export const data = {
 
-    loginEmail: "newaccountg@somewhere.com",// these info here are vaild
+    loginEmail: "sometdddhidngggggnewffw2222222@somewhere.com",// these info here are vaild
     loginPassword: "hahahaha",// these info here are vaild,
     incorrectLoginEmail: "12@s",
     incorrectLoginPassword: "12@s",
-    signupEmail: "sometdddllhidngggggnew2222222@somewhere.com",
+    signupEmail: "newemaildogg@somewhere.com",
     signupPassword: "hahahaha",
     signupUsername: "someone",
 
@@ -55,8 +55,8 @@ export const apiData = {
     },
 
     newAccount: {
-        email: "newaccountg@somewhere.com",
-        password: "hahahaha",
+        email: "abody2k@luckkk.com",
+        password: ",*F-4#f%~vC-ZCB",
         firstname: "noice",
         lastname: "dfgdfg",
         name: "haaaaaaaa      xxxxxxxx",
@@ -75,8 +75,8 @@ export const apiData = {
     },
 
     updateAccount: {
-        email: "somethidnggggg@somewhere.com",
-        password: "hahahaha",
+        email: "verynewaccount@account.com",
+        password: "LOOOL",
         firstname: "noice",
         lastname: "dfgdfg",
         name: "haaaaaaaa      xxxxxxxx",

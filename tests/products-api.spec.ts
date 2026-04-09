@@ -1,5 +1,5 @@
 import { getAllbrands, getAllbrandsWithPut, getAllProducts, getAllProductsWithPost, searchForProduct } from "../api/products.api";
-import { products } from "../data/products.data";
+import { productsNames } from "../data/products.data";
 import { expect, test } from "../fixtures/global.fixture";
 
 test.describe("all products api tests go here", () => {
@@ -57,7 +57,7 @@ test.describe("all products api tests go here", () => {
     test("Search for a product while providing a product name", async () => {
 
 
-        let data = await searchForProduct({ search_product: products[0] });
+        let data = await searchForProduct({ search_product: productsNames[0] });
 
         expect(data.responseCode).toBe(200);
         expect(data.products).toBeTruthy()

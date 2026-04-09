@@ -1,8 +1,6 @@
 import { data } from "../data/account.data";
-import { productsNames } from "../data/products.data";
 import { test, expect } from "../fixtures/global.fixture";
-import { makeNewAccount } from "../flows/auth.flow";
-import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, saveCurrentLoginState } from "../utils/account.util";
+import { goToLoginSingup, isLoginWarningVisible, loadLoginState, login, makeNewAccount, saveCurrentLoginState } from "../flows/auth.flow";
 import { randomInt } from "crypto";
 
 
@@ -27,12 +25,12 @@ let mydata = {
 
 
 
-test.describe("All account UI related test.skips", () => {
+test.describe("All account UI related tests", () => {
 
 
 
   //this is happy end test
-  test.skip("login with correct username and password", async ({ account, page }) => {
+  test("login with correct username and password", async ({ account, page }) => {
 
 
     await goToLoginSingup(page, account);
@@ -43,7 +41,7 @@ test.describe("All account UI related test.skips", () => {
 
   });
 
-  test.skip("login with incorrect username and password", async ({ account, page }) => {
+  test("login with incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.incorrectLoginPassword);
@@ -53,7 +51,7 @@ test.describe("All account UI related test.skips", () => {
 
   });
 
-  test.skip("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
+  test("login with a combination of correct and incorrect username and password", async ({ account, page }) => {
 
     await goToLoginSingup(page, account);
     await login(account, data.incorrectLoginEmail, data.loginPassword);
@@ -67,7 +65,7 @@ test.describe("All account UI related test.skips", () => {
 
   });
 
-  test.skip("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
+  test("logging in using using saved login data without the use of the login UI", async ({ page, header }) => {
 
     await loadLoginState(page);
     await page.goto("");
@@ -77,7 +75,7 @@ test.describe("All account UI related test.skips", () => {
   })
 
   //happy end case
-  test.skip("signup using correct genuine data", async ({ account, page, header }) => {
+  test("signup using correct genuine data", async ({ account, page, header }) => {
 
     await goToLoginSingup(page, account);
 

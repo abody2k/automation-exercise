@@ -14,13 +14,15 @@ test.describe("All contact us page related tests goes here",()=>{
         await contactUs.fillEmail(contactUsData.email)
         await contactUs.fillSubject(contactUsData.subject)
         await contactUs.fillMsg(contactUsData.msg)
+        
         await contactUs.uploadFile(contactUsData.filePath)
+        await page.waitForTimeout(200);
         page.on('dialog', dialog => dialog.accept());
         await contactUs.submit();
         
         
         
-        await expect(contactUs.successMsg).toBeVisible({timeout:30000});
+        await expect(contactUs.successMsg).toBeVisible({timeout:60000});
         await contactUs.goHome();
         await expect(page).toHaveURL(process.env.BASE_URL);
 

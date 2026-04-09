@@ -57,9 +57,12 @@ export class ContactUs {
      */
     async uploadFile(filePath: string) {
 
-        let selector = this.page.getByRole('button', { name: 'Choose File' })
-        await selector.click()
+        let selector = this.page.locator("input[name='upload_file']")
+        await this.page.waitForTimeout(200);
+        await selector.waitFor({state:'attached'})
+        // await this.page.waitForTimeout(200);
         await selector.setInputFiles(path.resolve(__dirname, filePath))
+        console.log(await selector.count())
     }
 
 
