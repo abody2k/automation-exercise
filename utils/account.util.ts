@@ -10,14 +10,7 @@ import { Header } from "../components/header.component";
 
 
 
-export async function goToLoginSingup(page: Page, account: Account) {
-    await account.gotoLoginSignup();
 
-
-    //the user should stay there without redirection
-
-    await expect(page).toHaveURL(/.*login/);
-}
 
 
 export async function goToProductsThroughHome({ page, header }: { page: Page, header: Header }) {

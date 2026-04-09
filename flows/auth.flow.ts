@@ -39,9 +39,20 @@ export async function makeNewAccount({ account, page, data, header }: { account:
  */
 export async function login(account: Account, email: string, password: string) {
 
-    
+
     await account.enterEmailForLogin(email)
     await account.enterPasswordForLogin(password);
     await account.login();
 
+}
+
+
+
+export async function goToLoginSingup(page: Page, account: Account) {
+    await account.gotoLoginSignup();
+
+
+    //the user should stay there without redirection
+
+    await expect(page).toHaveURL(/.*login/);
 }
