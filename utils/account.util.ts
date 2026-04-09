@@ -14,14 +14,7 @@ import path from "path";
 
 
 
-/**
- * checks if the login error warning is visible or not
- * @param account 
- */
-export async function isLoginWarningVisible(account: Account) {
 
-    await expect(account.loginWarningMsg).toBeVisible();
-}
 
 export async function saveCurrentLoginState(page: Page) {
     page.context().storageState({ path: path.resolve(__dirname, "../data/login.data.json") })

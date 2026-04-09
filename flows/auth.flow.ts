@@ -56,3 +56,14 @@ export async function goToLoginSingup(page: Page, account: Account) {
 
     await expect(page).toHaveURL(/.*login/);
 }
+
+
+
+/**
+ * checks if the login error warning is visible or not
+ * @param account 
+ */
+export async function isLoginWarningVisible(account: Account) {
+
+    await expect(account.loginWarningMsg).toBeVisible();
+}
