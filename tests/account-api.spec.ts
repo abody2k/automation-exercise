@@ -1,5 +1,5 @@
 import path from "path";
-import { apiData, data } from "../data/account.data";
+import {  apiData, data } from "../data/account.data";
 import { test, expect } from "../fixtures/global.fixture";
 import dotenv from "dotenv";
 import { deleteAccount, getUserAccountDetailByEmail, registerAccount, updateUserAccount, verifyLogin, verifyLoginwithDelete, verifyLoginwithPost } from "../api/account.api";
@@ -28,11 +28,14 @@ let mydata = {
 test.describe("All account API tests goes here", () => {
 
 
+test.beforeEach(()=>{
 
+console.log(apiData.updateAccount)  
+})
 
   test("register account using API only", async ({ }) => {
-    apiData.newAccount.email += randomInt(100, 1000).toString(27)
-    var context = await registerAccount(apiData.newAccount)
+
+    var context = await registerAccount(mydata)
 
     expect(context.responseCode).toBe(201)
     expect(context.message).toBe("User created!")
@@ -40,10 +43,10 @@ test.describe("All account API tests goes here", () => {
 
   test("Using same email to create an account more than once should not work", { annotation: { type: "edge case", description: "if it fails it means system allows creation of more than 1 account using same email" } }, async ({ }) => {
     let email = data.signupEmailNew + randomInt(100, 1000).toString(27)
-    let context = await registerAccount({ name: data.signupUsername, email: email, password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year,country:data.country })
+    let context = await registerAccount({ name: data.signupUsername, email: email, password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
     console.log(context);
 
-    
+
     expect(context.responseCode).toBe(201) // it is ok if the given data is new so the test should pass
 
     context = await registerAccount({ name: data.signupUsername, email: email, password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
@@ -61,7 +64,7 @@ test.describe("All account API tests goes here", () => {
   */
   test("registering account using invalid birth date info", { annotation: { type: "edge case", description: "if it fails it means system allows creation of more than 1 account using same email" } }, async ({ }) => {
 
-    let context = await registerAccount({ name: data.signupUsername, email: data.signupEmail + randomInt(100, 1000).toString(27), password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.invalidBirth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
+    let context = await registerAccount({ name: data.signupUsername, email: mydata.email, password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.invalidBirth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
 
     expect(context.responseCode, "Day is not in the valid range").toBeGreaterThanOrEqual(400) // it is ok if the given data is new so the test should pass
 
@@ -106,7 +109,7 @@ test.describe("All account API tests goes here", () => {
   for (const [key, value] of Object.entries(mydata)) {
 
 
-    test(`registering account without send ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
+    test(`registering account without sending ${key}`, { annotation: { type: `edge case", description: "registering an account without sending the ${key}` } }, async ({ }) => {
       const typedKey = key as keyof typeof mydata;
       const { [typedKey]: _, ...tempData } = mydata
       let context = await registerAccount(tempData)
@@ -120,7 +123,7 @@ test.describe("All account API tests goes here", () => {
 
   test(`getting account details by email`, async ({ }) => {
 
-    let s = await getUserAccountDetailByEmail(data.signupEmail);
+    let s = await getUserAccountDetailByEmail(mydata.email);
     console.log(s);
     expect(s.responseCode).toBe(200);
 
@@ -146,9 +149,10 @@ test.describe("All account API tests goes here", () => {
 
   test(`updating account`, async ({ }) => {
 
+    
     let s = await updateUserAccount(apiData.updateAccount);
 
-    expect(s.responseCode, "the API call actually points to a data which is not correct behavior").toBe(200);
+    expect(s.responseCode, "User data failed to update").toBe(200);
     expect(s.message).toBe("User updated!")
   });
 
@@ -156,7 +160,7 @@ test.describe("All account API tests goes here", () => {
 
   test(`deleting an account using provided email and password`, async ({ }) => {
 
-    let s = await deleteAccount(apiData.deleteAccount.email, apiData.deleteAccount.password);
+    let s = await deleteAccount(mydata.email, mydata.password);
     console.log(s);
 
     expect(s.responseCode, "failed deleting data").toBe(200);
@@ -167,9 +171,10 @@ test.describe("All account API tests goes here", () => {
 
 
 
-  test(`verfiy logging in with valid details`, async ({ }) => {
+  test(`verify logging in with valid details`, async ({ }) => {
 
-    let s = await verifyLogin(apiData.newAccount.email, apiData.newAccount.password);
+    console.log(apiData.updateAccount)
+    let s = await verifyLogin(apiData.updateAccount.email, apiData.updateAccount.password);
     console.log(s);
 
     expect(s.responseCode, "failed veryfying logging data").toBe(200);
@@ -178,7 +183,7 @@ test.describe("All account API tests goes here", () => {
 
   test(`veryfing  logging in with invalid details`, async ({ }) => {
 
-    let s = await verifyLogin(apiData.newAccount.email, apiData.newAccount.password + " very wrong details");
+    let s = await verifyLogin(mydata.email, mydata.password + " very wrong details");
     console.log(s);
 
     expect(s.responseCode, "failed veryfying logging data").toBe(404);
@@ -199,7 +204,7 @@ test.describe("All account API tests goes here", () => {
 
   test(`verifying logging in using post method`, { annotation: { type: "edge case" } }, async ({ }) => {
 
-    let s = await verifyLoginwithPost(apiData.newAccount.password);
+    let s = await verifyLoginwithPost(mydata.password);
     console.log(s);
 
     expect(s.responseCode).toBe(400);

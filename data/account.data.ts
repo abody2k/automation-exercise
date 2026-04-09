@@ -55,8 +55,8 @@ export const apiData = {
     },
 
     newAccount: {
-        email: "newaccountg@somewhere.com",
-        password: "hahahaha",
+        email: "abody2k@luckkk.com",
+        password: ",*F-4#f%~vC-ZCB",
         firstname: "noice",
         lastname: "dfgdfg",
         name: "haaaaaaaa      xxxxxxxx",
@@ -75,8 +75,8 @@ export const apiData = {
     },
 
     updateAccount: {
-        email: "somethidnggggg@somewhere.com",
-        password: "hahahaha",
+        email: "verynewaccount@account.com",
+        password: "LOOOL",
         firstname: "noice",
         lastname: "dfgdfg",
         name: "haaaaaaaa      xxxxxxxx",
