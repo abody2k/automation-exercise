@@ -9,7 +9,7 @@ export class Checkout {
     constructor(private page: Page) {
 
         this.addressDelivery = page.locator("#address_delivery")
-        this.orderPlacedSuccessfullyMsg = page.locator("#success_message").first()
+        this.orderPlacedSuccessfullyMsg = page.locator(".alert-success").getByText("Your order has been placed successfully!").first()
     }
 
     /**

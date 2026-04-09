@@ -11,7 +11,7 @@ export const data = {
     loginPassword: "hahahaha",// these info here are vaild,
     incorrectLoginEmail: "12@s",
     incorrectLoginPassword: "12@s",
-    signupEmail: "sometdddhidngggggnewff2222222@somewhere.com",
+    signupEmail: "sometdddhidngggggnewffw2222222@somewhere.com",
     signupPassword: "hahahaha",
     signupUsername: "someone",
 
