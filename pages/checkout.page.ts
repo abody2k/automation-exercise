@@ -4,7 +4,7 @@ export class Checkout {
 
 
     addressDelivery: Locator
-    orderPlacedSuccessfullyMsg: Locator 
+    orderPlacedSuccessfullyMsg: Locator
 
     constructor(private page: Page) {
 
@@ -137,6 +137,13 @@ export class Checkout {
     async clickOnContinueAfterPaying() {
 
         await this.page.getByRole('link', { name: 'Continue' }).click();
+    }
+
+    /**
+     * When you click on proceed (in cart) and you are not logged in
+     */
+    async clickOnRegister() {
+        await this.page.getByRole('link', { name: 'Register / Login' }).click();
     }
 
 }
