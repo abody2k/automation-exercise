@@ -28,10 +28,7 @@ let mydata = {
 test.describe("All account API tests goes here", () => {
 
 
-test.beforeEach(()=>{
 
-console.log(apiData.updateAccount)  
-})
 
   test("register account using API only", async ({ }) => {
 
@@ -44,8 +41,6 @@ console.log(apiData.updateAccount)
   test("Using same email to create an account more than once should not work", { annotation: { type: "edge case", description: "if it fails it means system allows creation of more than 1 account using same email" } }, async ({ }) => {
     let email = data.signupEmailNew + randomInt(100, 1000).toString(27)
     let context = await registerAccount({ name: data.signupUsername, email: email, password: data.signupPassword, city: data.city, state: data.state, firstname: data.firstName, lastname: data.lastName, zipcode: data.zipCode, address1: data.address, mobile_number: data.mobileNumber, birth_date: data.birth_date, birth_month: data.birth_month, birth_year: data.birth_year, country: data.country })
-    console.log(context);
-
 
     expect(context.responseCode).toBe(201) // it is ok if the given data is new so the test should pass
 
@@ -124,7 +119,6 @@ console.log(apiData.updateAccount)
   test(`getting account details by email`, async ({ }) => {
 
     let s = await getUserAccountDetailByEmail(mydata.email);
-    console.log(s);
     expect(s.responseCode).toBe(200);
 
   });
@@ -161,7 +155,6 @@ console.log(apiData.updateAccount)
   test(`deleting an account using provided email and password`, async ({ }) => {
 
     let s = await deleteAccount(mydata.email, mydata.password);
-    console.log(s);
 
     expect(s.responseCode, "failed deleting data").toBe(200);
     expect(s.message).toBe("Account deleted!")
@@ -173,9 +166,7 @@ console.log(apiData.updateAccount)
 
   test(`verify logging in with valid details`, async ({ }) => {
 
-    console.log(apiData.updateAccount)
     let s = await verifyLogin(apiData.updateAccount.email, apiData.updateAccount.password);
-    console.log(s);
 
     expect(s.responseCode, "failed veryfying logging data").toBe(200);
 
@@ -184,7 +175,6 @@ console.log(apiData.updateAccount)
   test(`veryfing  logging in with invalid details`, async ({ }) => {
 
     let s = await verifyLogin(mydata.email, mydata.password + " very wrong details");
-    console.log(s);
 
     expect(s.responseCode, "failed veryfying logging data").toBe(404);
 
@@ -194,7 +184,6 @@ console.log(apiData.updateAccount)
   test(`verifying logging in using delete method`, { annotation: { type: "edge case" } }, async ({ }) => {
 
     let s = await verifyLoginwithDelete();
-    console.log(s);
 
     expect(s.responseCode).toBe(405);
 
@@ -205,7 +194,6 @@ console.log(apiData.updateAccount)
   test(`verifying logging in using post method`, { annotation: { type: "edge case" } }, async ({ }) => {
 
     let s = await verifyLoginwithPost(mydata.password);
-    console.log(s);
 
     expect(s.responseCode).toBe(400);
     expect(s.message).toBe("Bad request, email or password parameter is missing in POST request.");
