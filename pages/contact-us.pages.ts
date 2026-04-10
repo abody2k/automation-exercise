@@ -62,7 +62,6 @@ export class ContactUs {
         await selector.waitFor({state:'attached'})
         // await this.page.waitForTimeout(200);
         await selector.setInputFiles(path.resolve(__dirname, filePath))
-        console.log(await selector.count())
     }
 
 

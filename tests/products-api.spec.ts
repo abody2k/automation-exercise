@@ -33,7 +33,6 @@ test.describe("all products api tests go here", () => {
 
 
         let data = await getAllbrands();
-        console.log(data);
 
         expect(data.responseCode).toBe(200);
         expect(data.brands).toBeTruthy();
