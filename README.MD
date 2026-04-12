@@ -150,10 +150,12 @@ These are:
 
 ---
 
-[![Playwright Tests](https://github.com/abody2k/automation-exercise/actions/workflows/playwright.yml/badge.svg)](https://github.com/abody2k/automation-exercise/actions/workflows/playwright.yml)
+
 
 ## 👤 Author
 
-**Abdulrahman Alhamdani**
+**Abdulrahman Ali**
 
 ---
+
+[![Playwright Tests](https://github.com/abody2k/automation-exercise/actions/workflows/playwright.yml/badge.svg)](https://github.com/abody2k/automation-exercise/actions/workflows/playwright.yml)
